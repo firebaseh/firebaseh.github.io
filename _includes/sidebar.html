@@ -1,40 +1,7 @@
 <div class="col-lg-4 mt-4 mt-lg-0 sidebar w-100">
 
-  <!-- TRENDING POSTS (MANUAL CONTROL) -->
-  <div class="card border-0 bg-light mb-4">
-    <div class="card-body">
-      {% assign trending = site.posts | where: "featured", true %}
-      {% for post in trending limit:4 %}
-      <div class="d-flex mb-3">
-
-        {% if post.image %}
-        <div class="me-2" style="width:80px;">
-          <img 
-            src="{{ post.image | relative_url }}" 
-            class="img-fluid rounded"
-            loading="lazy"
-            style="height:60px; object-fit:cover;"
-          >
-        </div>
-        {% endif %}
-
-        <div>
-          <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
-            <small class="fw-semibold d-block">
-              {{ post.title | truncate: 50 }}
-            </small>
-          </a>
-          <small class="text-muted">{{ post.date | date: "%b %d, %Y" }}</small>
-        </div>
-
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-
-
   <!-- RECENT POSTS -->
-  <div class="card border-0 shadow-sm mb-4">
+  <div class="card border-0 bg-light mb-4">
     <div class="card-body">
       <h5 class="fw-bold mb-3">Recent</h5>
 
