@@ -8,7 +8,7 @@ layout: default
 
       <div class="post-img">
         {% if page.image %}
-        <img class="rounded" src="{{page.image | relative_url}}" alt="{{page.title}}" />
+        <img class="rounded" src="{{page.image | relative_url}}" alt="{{page.title}}" loading="lazy" />
         {% endif %}
       </div>
 
@@ -29,6 +29,13 @@ layout: default
 
       <div class="post-content" itemprop="articleBody">{{ content }}</div>
     </article>
+
+    <div class="mt-3 d-flex gap-2">
+      <a href="https://wa.me/?text={{ post.title | url_encode }} {{ site.url }}{{ post.url }}" target="_blank"
+        class="btn btn-sm btn-success"> WA </a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ post.url }}" target="_blank"
+        class="btn btn-sm btn-primary"> FB </a>
+    </div>
 
     <div class="next-previous-articles">
       <nav aria-label="">
