@@ -126,3 +126,29 @@ $on-laptop: 800px;
     top: 90px;
   }
 }
+
+/**
+* Footer
+*/
+
+.footer {
+  font-size: 14px;
+}
+
+.footer a {
+  color: #333;
+  transition: 0.3s;
+}
+
+.footer a:hover {
+  color: #000;
+  opacity: 0.7;
+}
+
+.footer i {
+  transition: 0.3s;
+}
+
+.footer a:hover i {
+  transform: scale(1.2);
+}
