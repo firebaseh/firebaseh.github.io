@@ -1,6 +1,7 @@
 ---
 ---
 @import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 // Our variables
 $base-font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -41,6 +42,46 @@ $on-laptop: 800px;
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import "layout", "custom", "syntax-highlighting";
 
+/**
+* Font Family
+*/
+
+.roboto {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+
+.nunito-sans {
+  font-family: "Nunito Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100,
+    "YTLC" 500;
+}
+
+.archivo-black-regular {
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.google-sans {
+  font-family: "Google Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+    "GRAD" 0;
+}
+
+/**
+* Navigasi
+*/
 
 .nav-link:hover {
   color: #000;
