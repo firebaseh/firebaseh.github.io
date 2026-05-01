@@ -5,7 +5,7 @@
       <!-- ABOUT -->
       <div class="col-12 col-md-4">
         <h5 class="fw-bold mb-3">{{ site.title }}</h5>
-        <p class="text-muted small">
+        <p class="text-muted lh-base">
           {{ site.description }}
         </p>
       </div>
@@ -13,7 +13,7 @@
       <!-- MENU -->
       <div class="col-6 col-md-2">
         <h6 class="fw-bold mb-3">Menu</h6>
-        <ul class="list-unstyled">
+        <ul class="list-unstyled lh-base">
           <li><a href="{{ '/' | relative_url }}" class="text-decoration-none">Home</a></li>
           <li><a href="/about/" class="text-decoration-none">About</a></li>
           <li><a href="/contact/" class="text-decoration-none">Contact</a></li>
@@ -24,7 +24,7 @@
       <!-- CATEGORIES -->
       <div class="col-6 col-md-3">
         <h6 class="fw-bold mb-3">Categories</h6>
-        <ul class="list-unstyled">
+        <ul class="list-unstyled lh-base">
           {% for category in site.categories limit:5 %}
           <li>
             <a href="/categories/{{ category[0] | slugify }}/" class="text-decoration-none">
