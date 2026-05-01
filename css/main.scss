@@ -66,3 +66,31 @@ $on-laptop: 800px;
 .card-hover:hover .card-img-top {
   transform: scale(1.05);
 }
+
+.post-content p {
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.post-content img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+
+.post-content h2, 
+.post-content h3 {
+  margin-top: 1.5rem;
+  font-weight: 600;
+}
+
+
+.related-posts img {
+  height: 120px;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+.related-posts a:hover img {
+  transform: scale(1.05);
+}

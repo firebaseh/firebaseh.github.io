@@ -51,29 +51,6 @@ layout: compress
         });
       });
     });
-
-
-    /* LOAD MORE */
-    let page = 2;
-    const btn = document.getElementById('load-more');
-    const container = document.getElementById('post-container');
-
-    btn.addEventListener('click', () => {
-      fetch(`/page${page}/`)
-        .then(res => res.text())
-        .then(html => {
-          let doc = new DOMParser().parseFromString(html, 'text/html');
-          let newPosts = doc.querySelectorAll('.post-item');
-
-          if (newPosts.length === 0) {
-            btn.style.display = 'none';
-            return;
-          }
-
-          newPosts.forEach(el => container.appendChild(el));
-          page++;
-        });
-    });
   </script>
 
   {% if site.analytics %}{% include analytics.html %}{% endif %}

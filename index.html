@@ -63,26 +63,6 @@ layout: default
           </div>
 
         </a>
-
-        <!-- SHARE -->
-        <div class="px-3 pb-3 d-flex gap-2">
-          <a 
-            href="https://wa.me/?text={{ post.title | url_encode }} {{ site.url }}{{ post.url }}" 
-            target="_blank"
-            class="btn btn-sm btn-success w-50"
-          >
-            WA
-          </a>
-
-          <a 
-            href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ post.url }}" 
-            target="_blank"
-            class="btn btn-sm btn-primary w-50"
-          >
-            FB
-          </a>
-        </div>
-
       </div>
 
     </div>
@@ -131,10 +111,4 @@ layout: default
     </ul>
   </nav>
   {% endif %}
-</div>
-
-
-<!-- LOAD MORE (INFINITE READY) -->
-<div class="text-center mb-5">
-  <button id="load-more" class="btn btn-dark px-4">Load More</button>
 </div>
