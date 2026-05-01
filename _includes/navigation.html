@@ -1,54 +1,63 @@
-<nav class="container navbar navbar-expand-lg navbar-light bg-transparent">
-  <a class="navbar-brand" href={{"/" | relative_url}}>Cards</a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+  <div class="container">
+    
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold" href="{{ '/' | relative_url }}">
+      Cards
+    </a>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" href={{"/" | relative_url}}
-          >Home <span class="sr-only">(current)</span></a
-        >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href={{"/about/" | relative_url}} >About</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle"
-          href="#"
-          id="navbarDropdown"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
+    <!-- Toggle -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ '/' | relative_url }}">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{ '/about/' | relative_url }}">About</a>
+        </li>
+
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
           <a
-            class="dropdown-item"
-            target="_blank"
-            href="https://jekyll-themes.com"
-            >More Themes</a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
           >
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="https://github.com/sharu725/cards">Download</a>
-      </li>
-    </ul>
+            Explore
+          </a>
+          <ul class="dropdown-menu shadow-sm border-0">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <a class="dropdown-item" target="_blank" href="https://jekyll-themes.com">
+                More Themes
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Button CTA -->
+        <li class="nav-item ms-lg-3">
+          <a class="btn btn-dark px-3" href="https://github.com/sharu725/cards">
+            Download
+          </a>
+        </li>
+
+      </ul>
+    </div>
   </div>
 </nav>
