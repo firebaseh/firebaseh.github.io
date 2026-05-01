@@ -14,10 +14,10 @@
       <div class="col-6 col-md-2">
         <h6 class="fw-bold mb-3">Menu</h6>
         <ul class="list-unstyled lh-base">
-          <li><a href="{{ '/' | relative_url }}" class="text-decoration-none">Home</a></li>
-          <li><a href="/about/" class="text-decoration-none">About</a></li>
-          <li><a href="/contact/" class="text-decoration-none">Contact</a></li>
-          <li><a href="/sitemap/" class="text-decoration-none">Sitemap</a></li>
+          <li><a href="{{ '/' | relative_url }}" class="text-decoration-none text-capitalize">Home</a></li>
+          <li><a href="/about/" class="text-decoration-none text-capitalize">About</a></li>
+          <li><a href="/contact/" class="text-decoration-none text-capitalize">Contact</a></li>
+          <li><a href="/sitemap/" class="text-decoration-none text-capitalize">Sitemap</a></li>
         </ul>
       </div>
 
@@ -27,7 +27,7 @@
         <ul class="list-unstyled lh-base">
           {% for category in site.categories limit:5 %}
           <li>
-            <a href="/categories/{{ category[0] | slugify }}/" class="text-decoration-none">
+            <a href="/categories/{{ category[0] | slugify }}/" class="text-decoration-none text-capitalize">
               {{ category[0] }}
             </a>
           </li>
