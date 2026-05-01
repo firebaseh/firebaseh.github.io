@@ -2,27 +2,7 @@
 layout: default
 ---
 
-<div class="container py-4">
-
-  <!-- SEARCH -->
-  <div class="mb-3">
-    <input 
-      type="text" 
-      id="search-input" 
-      class="form-control" 
-      placeholder="Search posts..."
-    >
-  </div>
-
-  <!-- CATEGORY FILTER -->
-  <div class="mb-4 text-center">
-    <button class="btn btn-sm btn-dark m-1 filter-btn" data-filter="all">All</button>
-    {% for cat in site.categories %}
-      <button class="btn btn-sm btn-outline-dark m-1 filter-btn" data-filter="{{ cat[0] }}">
-        {{ cat[0] }}
-      </button>
-    {% endfor %}
-  </div>
+<div class="row py-4">
 
   <!-- POSTS -->
   <div class="row g-4" id="post-container">

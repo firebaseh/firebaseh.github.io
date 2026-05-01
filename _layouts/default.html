@@ -26,33 +26,6 @@ layout: compress
     integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
   </script>
 
-  <script>
-    /* SEARCH */
-    const searchInput = document.getElementById('search-input');
-    const posts = document.querySelectorAll('.post-item');
-
-    searchInput.addEventListener('keyup', function () {
-      let val = this.value.toLowerCase();
-      posts.forEach(post => {
-        post.style.display = post.innerText.toLowerCase().includes(val) ? '' : 'none';
-      });
-    });
-
-
-    /* CATEGORY FILTER */
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        let filter = btn.dataset.filter;
-
-        posts.forEach(post => {
-          let cat = post.dataset.category;
-
-          post.style.display = (filter === 'all' || cat.includes(filter)) ? '' : 'none';
-        });
-      });
-    });
-  </script>
-
   {% if site.analytics %}{% include analytics.html %}{% endif %}
 </body>
 
