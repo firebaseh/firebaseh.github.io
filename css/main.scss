@@ -41,3 +41,28 @@ $on-laptop: 800px;
 
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import "layout", "custom", "syntax-highlighting";
+
+
+.nav-link:hover {
+  color: #000;
+  opacity: 0.7;
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.card-img-top {
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card-hover:hover .card-img-top {
+  transform: scale(1.05);
+}
