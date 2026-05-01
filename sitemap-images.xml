@@ -1,0 +1,75 @@
+---
+layout: null
+permalink: /sitemap-images.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset 
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+{% for post in site.posts %}
+<url>
+  <loc>{{ site.url }}{{ site.baseurl }}{{ post.url }}</loc>
+
+  {%- assign content = post.content -%}
+
+  {%- comment -%}
+  DETECT <img src="...">
+  {%- endcomment -%}
+  {% assign parts = content | split:'<img' %}
+  {% for part in parts offset:1 %}
+    {% assign srcPart = part | split:'src="' | last %}
+    {% assign img = srcPart | split:'"' | first %}
+
+    {% if img contains 'http' %}
+      <image:image>
+        <image:loc>{{ img }}</image:loc>
+        <image:title>{{ post.title | escape }}</image:title>
+      </image:image>
+    {% elsif img != "" %}
+      <image:image>
+        <image:loc>{{ site.url }}{{ site.baseurl }}/{{ img }}</image:loc>
+        <image:title>{{ post.title | escape }}</image:title>
+      </image:image>
+    {% endif %}
+  {% endfor %}
+
+  {%- comment -%}
+  DETECT Markdown image ![](url)
+  {%- endcomment -%}
+  {% assign mdparts = content | split:'![' %}
+  {% for md in mdparts offset:1 %}
+    {% assign urlPart = md | split:'(' | last %}
+    {% assign img2 = urlPart | split:')' | first %}
+
+    {% if img2 contains 'http' %}
+      <image:image>
+        <image:loc>{{ img2 }}</image:loc>
+        <image:title>{{ post.title | escape }}</image:title>
+      </image:image>
+    {% elsif img2 != "" %}
+      <image:image>
+        <image:loc>{{ site.url }}{{ site.baseurl }}/{{ img2 }}</image:loc>
+        <image:title>{{ post.title | escape }}</image:title>
+      </image:image>
+    {% endif %}
+  {% endfor %}
+
+  {%- comment -%}
+  FALLBACK: post.image (jika tidak ada di content)
+  {%- endcomment -%}
+  {% if post.image %}
+    <image:image>
+      {% if post.image contains 'http' %}
+        <image:loc>{{ post.image }}</image:loc>
+      {% else %}
+        <image:loc>{{ site.url }}{{ site.baseurl }}/{{ post.image }}</image:loc>
+      {% endif %}
+      <image:title>{{ post.title | escape }}</image:title>
+    </image:image>
+  {% endif %}
+
+</url>
+{% endfor %}
+
+</urlset>
