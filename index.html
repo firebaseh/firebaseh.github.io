@@ -2,142 +2,70 @@
 layout: default
 ---
 
-{% if site.layout_home_page == true %}
-{% if site.featured-post-slider == true %}
-<!-- featured post -->
-<section>
-  <div class="container-fluid p-sm-0">
-    <div class="row featured-post-slider">
-      {% for post in site.posts %}
-      {% if post.featured == true %}
-      <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 px-1">
-        <article class="card bg-dark text-center text-white border-0 rounded-0">
-          <img class="card-img rounded-0 img-fluid w-100" src="{{post.image | relative_url}}" alt="{{post.title}}">
-          <div class="card-img-overlay">
-            <div class="card-content">
-              {% if post %}
-                {% assign categories = post.categories %}
-              {% else %}
-              {% assign categories = page.categories %}
-              {% endif %}
-              {% for category in post.categories %}
-              <a class="d-block mb-3 text-white text-uppercase" href="{{ 'category/' | relative_url }}{{ category | slugify }}">{{ category }}</a>
-              {% endfor %}
-              <h4 class="card-title mb-4"><a class="text-white" href="{{ post.url | relative_url }}">{{post.title}}</a></h4>
-              <a class="btn btn-outline-light" href="{{ post.url | relative_url }}">read more</a>
+<div class="home py-4 py-md-5">
+  <div class="row">
+    {% for post in paginator.posts %}   
+      <div class="col-12 col-md-6 col-lg-4">
+       <a href="{{ post.url | prepend: site.baseurl }}" class="index-anchor">
+        <div class="card rounded overflow-hidden">  
+          <div class="image">
+            {% if post.image %}
+            <img src="{{post.image | relative_url}}" alt="{{post.title}}">
+            {% endif %}
+            <div class="card-body">
+              <h2 class="panel-title">{{ post.title | truncate: 25 }}</h2>
+              <p class="p-0 my-1 mx-0"><span class="post-meta"><small>{{ post.date | date: "%b %-d, %Y" }}</small></span></p>
+               <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 150 }}</p>
             </div>
           </div>
-        </article>
+        </div>
+      </a>
       </div>
-      {% endif %}
-      {% endfor %}
-    </div>
+    {% endfor %}
   </div>
-</section>
-<!-- /featured post -->
-{% endif %}
+</div> 
+    
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+        {% if paginator.total_pages > 1 %}
+        <ul class="pagination">
+          {% if paginator.previous_page %}
+            <li class="page-item">
+              <a class="page-link" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
+            </li>
+          {% else %}
+            <li class="page-item disabled">
+              <span class="page-link">Previous</span>
+            </li>
+          {% endif %}
 
-<!-- blog post -->
-<section class="section">
-  <div class="container">
-    <div class="row masonry-container">
-			{% if site.posts.size > 0 %}
-			{% for post in paginator.posts %}
-      <div class="col-lg-4 col-sm-6 mb-5">
-        <article class="text-center">
-					<img class="img-fluid mb-4" src="{{post.image | relative_url}}" alt="{{post.title}}">
-					{% if post %}
-						{% assign categories = post.categories %}
-					{% else %}
-					{% assign categories = page.categories %}
-					{% endif %}
-					{% for category in post.categories %}
-          <a class="d-block mb-3 text-dark text-uppercase" href="{{ 'category/' | relative_url }}{{ category | slugify }}">{{ category }}</a>
+          {% for page in (1..paginator.total_pages) %}
+            {% if page == paginator.page %}
+              <li class="page-item active">
+                <span class="page-link">{{ page }}</span>
+              </li>
+            {% elsif page == 1 %}
+              <li class="page-item">
+                <a class="page-link" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+              </li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a></li>
+            {% endif %}
           {% endfor %}
-          <h4 class="title-border"><a class="text-dark" href="{{ post.url | prepend: site.baseurl }}">{{post.title}}</a></h4>
-          <p>{{ post.content | strip_html | truncatewords: 35 }}</p>
-          <a href="{{ post.url | prepend: site.baseurl }}" class="btn btn-transparent">read more</a>
-        </article>
-      </div>
-			{% endfor %}
-			{% endif %}
+
+          {% if paginator.next_page %}
+            <li class="page-item">
+              <a class="page-link" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
+            </li>
+          {% else %}
+            <li class="page-item" disabled>
+              <span class="page-link">Next</span>
+            </li>
+          {% endif %}
+          </ul>
+        {% endif %}
     </div>
-    {% include pagination.html %}
   </div>
-</section>
-<!-- /blog post -->
 
-{% include instagram.html %}
-
-{% else %}
-
-<!-- dividers -->
-<div class="dividers">
-  <div class="divider"></div>
-  <div class="divider"></div>
-  <div class="divider"></div>
-  <div class="divider"></div>
 </div>
-
-<!-- hero area -->
-<section class="hero-section">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6 align-self-end">
-        <h1 class="mb-0">Welcome</h1>
-        <h2 class="mb-100 title-border-lg">to <i>{{site.author.name}} Blog</i></h2>
-        <p class="mb-80 mr-5">{{site.hero.hero-subtitle}}</p>
-        <span class="font-secondary text-dark mr-3 mr-sm-5">Follow</span>
-        <ul class="list-inline d-inline-block mb-5">
-          {% for social in site.social %}
-          <li class="list-inline-item mx-3"><a href="{{ social.link }}" class="text-dark"><i class="{{ social.icon }}"></i></a></li>
-          {% endfor %}
-        </ul>
-      </div>
-      <div class="col-lg-6 text-right">
-        <img class="img-fluid" src="{{site.hero.hero-banner | relative_url }}" alt="banner-image">
-      </div>
-    </div>
-  </div>
-</section>
-<!-- /hero area -->
-
-<!-- blog post -->
-<section class="section">
-  <div class="container">
-    <div class="row">
-      {% if site.posts.size > 0 %}
-      {% for post in paginator.posts %}
-      {% capture thecycle %}{% cycle 'odd', 'even' %}{% endcapture %}
-      {% if thecycle == 'odd' %}
-        {% assign class = '' %}
-      {% else %}
-        {% assign class = 'article-right' %}
-      {% endif %}
-      <div class="col-12 mb-100">
-        <article data-file="{{ post.url | prepend: site.baseurl }}" data-target="article" class="article-full-width {{class}}">
-          <div class="post-image">
-            <img class="img-fluid" src="{{post.image | relative_url}}" alt="{{post.title}}">
-          </div>
-          <div class="post-content">
-            <ul class="list-inline d-flex justify-content-between border-bottom post-meta pb-2 mb-4">
-              <li class="list-inline-item"><i class="ti-calendar mr-2"></i>{{post.date | date: '%b %d, %Y'}}</li>
-              <li class="list-inline-item"><i class="ti-alarm-clock mr-2"></i><span class="eta"></span> read</li>
-            </ul>
-            <h4 class="mb-4"><a href="{{ post.url | prepend: site.baseurl }}" class="text-dark">{{post.title}}</a></h4>
-            <p class="mb-0 post-summary">{{ post.content | strip_html | truncatewords: 35 }}</p>
-            <a class="btn btn-transparent mb-4" href="{{ post.url | prepend: site.baseurl }}">Continue...</a>
-          </div>
-        </article>
-      </div>
-      {% endfor %}
-			{% endif %}
-    </div>
-    {% include pagination.html %}
-  </div>
-</section>
-<!-- /blog post -->
-
-{% include instagram.html %}
-
-{% endif %}

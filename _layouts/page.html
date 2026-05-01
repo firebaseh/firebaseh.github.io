@@ -1,21 +1,18 @@
 ---
 layout: default
 ---
-<section class="section">
-<div class="container">
-	<div class="row">
-		<div class="col-lg-12">
-			<h2 class="mb-4">{{ page.title | escape }}</h2>
-			
-			{% if page.image %}
-			<img src="{{page.image | relative_url}}" alt="{{page.title}}" class="img-fluid w-100 mb-4">
-			{% endif %}
 
-			{{ content }}
+<div class="row">
+  <div class="col-md-8">
+    <article class="post">
+      <header class="post-header">
+        <h1 class="post-title">{{ page.title }}</h1>
+      </header>
 
-		</div>
-	</div>
+      <div class="post-content">{{ content }}</div>
+    </article>
+  </div>
+  {% include sidebar.html %}
 </div>
-</section>
 
-{% include instagram.html %}
+{% include fb-script.html %}

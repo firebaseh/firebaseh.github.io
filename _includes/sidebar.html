@@ -1,34 +1,49 @@
-<div class="col-lg-4">
-  <div class="widget search-box">
-    <form action="/search.html" method="get">
-      <i class="ti-search"></i>
-      <input type="search" id="search-box" class="form-control border-0 pl-5" name="query" placeholder="Search">
-    </form>
+<div class="col-md-4 mt20">
+  <div class="post-img">
+    {% if page.image %}
+    <img
+      width="600"
+      class="rounded"
+      src="{{page.image | relative_url}}"
+      alt="{{page.title}}"
+    />
+    {% endif %}
   </div>
-  <div class="widget">
-    <h6 class="mb-4">LATEST POST</h6>
-    {% for post in site.posts limit:3 %}
-    <div class="media mb-4">
-      <div class="post-thumb-sm mr-3">
-        <img class="img-fluid" src="{{post.image | relative_url }}" alt="{{ post.title }}">
-      </div>
-      <div class="media-body">
-        <ul class="list-inline d-flex justify-content-between mb-2">
-          <li class="list-inline-item">Post By {{site.author.name | split: ' ' | first}}</li>
-          <li class="list-inline-item">{{post.date | date: "%B %-d, %Y"}}</li>
-        </ul>
-        <h6><a class="text-dark" href="{{ post.url }}">{{ post.title }}</a></h6>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-  <div class="widget">
-    <h6 class="mb-4">CATEGORIES</h6>
-    <ul class="list-inline tag-list">
-      {% for category in site.categories %}
-      <li class="list-inline-item m-1"><a href="{{ 'category/' | relative_url }}{{ category | first | slugify }}">{{ category | first }}</a></li>
-      {% unless forloop.last %}&nbsp;{% endunless %}
+
+  <div class="mt10 recent">
+    <h2>Recent articles</h2>
+    <ul>
+      {% for post in site.related_posts limit:3 %}
+
+      <li>
+        <p>
+          <a href="{{ post.url  | relative_url }}">{{ post.title }}</a
+          ><small>&nbsp;&nbsp;{{ post.date | date_to_string }}</small>
+        </p>
+      </li>
+
       {% endfor %}
     </ul>
   </div>
+  {% if site.fb-like-box %}
+  <div class="mt10">
+    <div
+      class="fb-page"
+      data-href="https://www.facebook.com/webjeda/"
+      data-width="400"
+      data-small-header="true"
+      data-adapt-container-width="true"
+      data-hide-cover="true"
+      data-show-facepile="true"
+    >
+      <blockquote
+        cite="https://www.facebook.com/webjeda/"
+        class="fb-xfbml-parse-ignore"
+      >
+        <a href="{{site.fb-page-url}}">{{site.fb-page-title}}</a>
+      </blockquote>
+    </div>
+  </div>
+  {% endif %}
+  <br />
 </div>

@@ -1,39 +1,54 @@
 ---
 layout: default
 ---
-<!-- page-title -->
-<section class="section bg-secondary">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<h4>{{ page.title | escape }}</h4>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- /page-title -->
 
-<!-- blog single -->
-<section>
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8">
-				<ul class="list-inline d-flex justify-content-between py-3">
-					<li class="list-inline-item"><i class="ti-user mr-2"></i>Post by {{site.author.name}}</li>
-					<li class="list-inline-item"><i class="ti-calendar mr-2"></i>{{page.date | date: '%b %d, %Y'}}</li>
-				</ul>
-				{% if page.image %}
-				<img src="{{page.image | relative_url}}" alt="{{page.title}}" class="w-100 img-fluid mb-4">
-				{% endif %}
-				<div class="content">
-					{{ content }}
-				</div>
-				{% if site.disqus-identifier %}
-				{% include disqus-comments.html %}
-				{% endif %}
-			</div>
-			{% include sidebar.html %}
-		</div>
-	</div>
-</section>
-<!-- /blog single -->
+<div class="row">
+  <div class="col-md-8">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          {{ page.title }}
+        </h1>
+        <p class="post-meta">
+          <time
+            datetime="{{ page.date | date_to_xmlschema }}"
+            itemprop="datePublished"
+            >{{ page.date | date: "%b %-d, %Y" }}</time
+          >{% if page.author %} •
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person"
+            ><span itemprop="name">{{ page.author }}</span></span
+          >{% endif %}
+        </p>
+      </header>
+      <div class="post-content" itemprop="articleBody">{{ content }}</div>
+    </article>
+
+    <div class="next-previous-articles">
+      <nav aria-label="">
+        <ul class="pagination">
+          {% if page.next.url %}
+          <li class="page-item">
+            <a class="page-link" href="{{page.next.url}}" tabindex="-1"
+              >&laquo; {{page.next.title}}</a
+            >
+          </li>
+          {% endif %} {% if page.previous.url %}
+          <li class="page-item">
+            <a class="page-link" href="{{page.previous.url}}"
+              >{{page.previous.title}} &raquo;</a
+            >
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+
+    <div class="">
+      {% if site.disqus-shortname %} {% include disqus.html %} {% endif %}
+    </div>
+  </div>
+
+  {% include sidebar.html %}
+</div>
+
+{% include fb-script.html %}
