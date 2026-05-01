@@ -3,42 +3,7 @@
     <div class="row g-4">
 
       <!-- ABOUT -->
-      <div class="col-12 col-md-4">
-        <h5 class="fw-bold mb-3 text-capitalize">{{ site.title }}</h5>
-        <p class="text-muted lh-base">
-          {{ site.description }}
-        </p>
-      </div>
-
-      <!-- MENU -->
-      <div class="col-6 col-md-2">
-        <h6 class="fw-bold mb-3">Menu</h6>
-        <ul class="list-unstyled lh-base">
-          <li><a href="{{ '/' | relative_url }}" class="text-decoration-none text-capitalize">Home</a></li>
-          <li><a href="/about/" class="text-decoration-none text-capitalize">About</a></li>
-          <li><a href="/contact/" class="text-decoration-none text-capitalize">Contact</a></li>
-          <li><a href="/sitemap/" class="text-decoration-none text-capitalize">Sitemap</a></li>
-        </ul>
-      </div>
-
-      <!-- CATEGORIES -->
-      <div class="col-6 col-md-3">
-        <h6 class="fw-bold mb-3">Categories</h6>
-        <ul class="list-unstyled lh-base">
-          {% for category in site.categories limit:5 %}
-          <li>
-            <a href="/categories/{{ category[0] | slugify }}/" class="text-decoration-none text-capitalize">
-              {{ category[0] }}
-            </a>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-
-      <!-- SOCIAL -->
-      <div class="col-12 col-md-3">
-        <h6 class="fw-bold mb-3">Follow</h6>
-
+      <div class="col-12 col-md-6">
         <div class="d-flex gap-3 fs-5">
 
           {% if site.facebook %}
@@ -58,23 +23,23 @@
           {% endif %}
 
         </div>
+      </div>
 
+      <!-- MENU -->
+      <div class="col-12 col-md-6 pt-3 text-end">
+        © {{ site.time | date: "%Y" }}
+        {% if site.copyright.name %}
+        <a href="{{site.copyright.link}}" target="_blank">
+          {{site.copyright.name}}
+        </a>
+        {% else %}
+        {{ site.title }}
+        {% endif %}
+        . All rights reserved.
       </div>
 
     </div>
 
-    <!-- COPYRIGHT -->
-    <div class="text-center mt-4 pt-3 border-top small text-muted">
-      © {{ site.time | date: "%Y" }}
-      {% if site.copyright.name %}
-      <a href="{{site.copyright.link}}" target="_blank">
-        {{site.copyright.name}}
-      </a>
-      {% else %}
-      {{ site.title }}
-      {% endif %}
-      . All rights reserved.
-    </div>
 
   </div>
 </footer>
