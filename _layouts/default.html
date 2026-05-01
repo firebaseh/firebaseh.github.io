@@ -27,16 +27,52 @@ layout: compress
   </script>
 
   <script>
-    const input = document.getElementById('search-input');
-    const posts = document.querySelectorAll('.card');
+    /* SEARCH */
+    const searchInput = document.getElementById('search-input');
+    const posts = document.querySelectorAll('.post-item');
 
-    input.addEventListener('keyup', function () {
-      let filter = input.value.toLowerCase();
-
+    searchInput.addEventListener('keyup', function () {
+      let val = this.value.toLowerCase();
       posts.forEach(post => {
-        let text = post.innerText.toLowerCase();
-        post.parentElement.style.display = text.includes(filter) ? '' : 'none';
+        post.style.display = post.innerText.toLowerCase().includes(val) ? '' : 'none';
       });
+    });
+
+
+    /* CATEGORY FILTER */
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        let filter = btn.dataset.filter;
+
+        posts.forEach(post => {
+          let cat = post.dataset.category;
+
+          post.style.display = (filter === 'all' || cat.includes(filter)) ? '' : 'none';
+        });
+      });
+    });
+
+
+    /* LOAD MORE */
+    let page = 2;
+    const btn = document.getElementById('load-more');
+    const container = document.getElementById('post-container');
+
+    btn.addEventListener('click', () => {
+      fetch(`/page${page}/`)
+        .then(res => res.text())
+        .then(html => {
+          let doc = new DOMParser().parseFromString(html, 'text/html');
+          let newPosts = doc.querySelectorAll('.post-item');
+
+          if (newPosts.length === 0) {
+            btn.style.display = 'none';
+            return;
+          }
+
+          newPosts.forEach(el => container.appendChild(el));
+          page++;
+        });
     });
   </script>
 

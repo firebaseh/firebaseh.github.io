@@ -53,14 +53,14 @@ $on-laptop: 800px;
 }
 
 .card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
 }
 
 .card-img-top {
-  height: 250px;
+  height: 240px;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: 0.4s;
 }
 
 .card-hover:hover .card-img-top {

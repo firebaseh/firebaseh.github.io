@@ -2,59 +2,92 @@
 layout: default
 ---
 
+<div class="container py-4">
 
-<div class="container mb-4">
-  <input 
-    type="text" 
-    id="search-input" 
-    class="form-control" 
-    placeholder="Search posts..."
-  >
-</div>
+  <!-- SEARCH -->
+  <div class="mb-3">
+    <input 
+      type="text" 
+      id="search-input" 
+      class="form-control" 
+      placeholder="Search posts..."
+    >
+  </div>
 
+  <!-- CATEGORY FILTER -->
+  <div class="mb-4 text-center">
+    <button class="btn btn-sm btn-dark m-1 filter-btn" data-filter="all">All</button>
+    {% for cat in site.categories %}
+      <button class="btn btn-sm btn-outline-dark m-1 filter-btn" data-filter="{{ cat[0] }}">
+        {{ cat[0] }}
+      </button>
+    {% endfor %}
+  </div>
 
-<div class="home py-5">
-  <div class="container">
-    <div class="row g-4">
+  <!-- POSTS -->
+  <div class="row g-4" id="post-container">
 
-      {% for post in paginator.posts %}   
-      <div class="col-12 col-md-6 col-lg-4">
-        
+    {% for post in paginator.posts %}   
+    <div 
+      class="col-12 col-md-6 col-lg-4 post-item"
+      data-category="{{ post.categories | join: ' ' }}"
+    >
+      
+      <div class="card border-0 shadow-sm h-100 card-hover">
+
         <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
-          <div class="card border-0 shadow-sm h-100 card-hover">
 
-            {% if post.image %}
-            <div class="overflow-hidden">
-              <img 
-                src="{{ post.image | relative_url }}" 
-                alt="{{ post.title }}" 
-                class="card-img-top img-fluid"
-                loading="lazy"
-              >
-            </div>
-            {% endif %}
-
-            <div class="card-body">
-              <h5 class="fw-semibold mb-2">
-                {{ post.title | truncate: 50 }}
-              </h5>
-
-              <small class="text-muted d-block mb-2">
-                {{ post.date | date: "%b %-d, %Y" }}
-              </small>
-
-              <p class="mb-0 text-secondary">
-                {{ post.excerpt | strip_html | truncate: 120 }}
-              </p>
-            </div>
-
+          {% if post.image %}
+          <div class="overflow-hidden">
+            <img 
+              src="{{ post.image | relative_url }}" 
+              alt="{{ post.title }}" 
+              class="card-img-top"
+              loading="lazy"
+            >
           </div>
+          {% endif %}
+
+          <div class="card-body">
+            <h5 class="fw-semibold mb-2">
+              {{ post.title | truncate: 50 }}
+            </h5>
+
+            <small class="text-muted d-block mb-2">
+              {{ post.date | date: "%b %-d, %Y" }}
+            </small>
+
+            <p class="text-secondary mb-2">
+              {{ post.excerpt | strip_html | truncate: 100 }}
+            </p>
+          </div>
+
         </a>
 
+        <!-- SHARE -->
+        <div class="px-3 pb-3 d-flex gap-2">
+          <a 
+            href="https://wa.me/?text={{ post.title | url_encode }} {{ site.url }}{{ post.url }}" 
+            target="_blank"
+            class="btn btn-sm btn-success w-50"
+          >
+            WA
+          </a>
+
+          <a 
+            href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ post.url }}" 
+            target="_blank"
+            class="btn btn-sm btn-primary w-50"
+          >
+            FB
+          </a>
+        </div>
+
       </div>
-      {% endfor %}
 
     </div>
+    {% endfor %}
+
   </div>
 </div>
 
@@ -65,29 +98,19 @@ layout: default
   <nav>
     <ul class="pagination justify-content-center">
 
-      <!-- Prev -->
       {% if paginator.previous_page %}
       <li class="page-item">
-        <a class="page-link" href="{{ paginator.previous_page_path | relative_url }}">
-          &laquo;
-        </a>
+        <a class="page-link" href="{{ paginator.previous_page_path | relative_url }}">&laquo;</a>
       </li>
       {% else %}
-      <li class="page-item disabled">
-        <span class="page-link">&laquo;</span>
-      </li>
+      <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
       {% endif %}
 
-      <!-- Numbers -->
       {% for page in (1..paginator.total_pages) %}
         {% if page == paginator.page %}
-        <li class="page-item active">
-          <span class="page-link">{{ page }}</span>
-        </li>
+        <li class="page-item active"><span class="page-link">{{ page }}</span></li>
         {% elsif page == 1 %}
-        <li class="page-item">
-          <a class="page-link" href="{{ '/' | relative_url }}">{{ page }}</a>
-        </li>
+        <li class="page-item"><a class="page-link" href="{{ '/' | relative_url }}">{{ page }}</a></li>
         {% else %}
         <li class="page-item">
           <a class="page-link" href="{{ site.paginate_path | relative_url | replace: ':num', page }}">
@@ -97,20 +120,21 @@ layout: default
         {% endif %}
       {% endfor %}
 
-      <!-- Next -->
       {% if paginator.next_page %}
       <li class="page-item">
-        <a class="page-link" href="{{ paginator.next_page_path | relative_url }}">
-          &raquo;
-        </a>
+        <a class="page-link" href="{{ paginator.next_page_path | relative_url }}">&raquo;</a>
       </li>
       {% else %}
-      <li class="page-item disabled">
-        <span class="page-link">&raquo;</span>
-      </li>
+      <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
       {% endif %}
 
     </ul>
   </nav>
   {% endif %}
+</div>
+
+
+<!-- LOAD MORE (INFINITE READY) -->
+<div class="text-center mb-5">
+  <button id="load-more" class="btn btn-dark px-4">Load More</button>
 </div>
