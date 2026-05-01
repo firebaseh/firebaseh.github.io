@@ -94,3 +94,23 @@ $on-laptop: 800px;
 .related-posts a:hover img {
   transform: scale(1.05);
 }
+
+/**
+* Sidebar
+*/
+
+.card {
+  border-radius: 12px;
+}
+
+.card-body a:hover {
+  opacity: 0.7;
+}
+
+.card-body img {
+  transition: 0.3s;
+}
+
+.card-body a:hover img {
+  transform: scale(1.05);
+}
