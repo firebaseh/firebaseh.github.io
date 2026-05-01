@@ -47,25 +47,10 @@ $on-laptop: 800px;
   opacity: 0.7;
 }
 
-.card-hover {
-  transition: all 0.3s ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
-}
-
 .card-img-top {
   height: 240px;
   object-fit: cover;
   transition: 0.4s;
-}
-
-.card-hover:hover .card-img-top {
-  transform: scale(1.05);
-  border-top-left-radius: var(--bs-card-inner-border-radius);
-  border-top-right-radius: var(--bs-card-inner-border-radius);
 }
 
 .post-content p {
