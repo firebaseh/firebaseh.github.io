@@ -1,49 +1,28 @@
-<div class="col-lg-4 w-100 mt-4 mt-lg-0 sidebar">
+<div class="col-lg-4 mt-4 mt-lg-0">
 
-  <!-- 🔥 TRENDING POSTS (MANUAL CONTROL) -->
-  <div class="card border-0 shadow-sm mb-4">
-    <div class="card-body">
-      {% assign trending = site.posts | where: "featured", true %}
-      {% for post in trending limit:4 %}
-      <div class="d-flex mb-3">
-
-        {% if post.image %}
-        <div class="me-2" style="width:80px;">
-          <img 
-            src="{{ post.image | relative_url }}" 
-            class="img-fluid rounded"
-            loading="lazy"
-            style="height:60px; object-fit:cover;"
-          >
-        </div>
-        {% endif %}
-
-        <div>
-          <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
-            <small class="fw-semibold d-block">
-              {{ post.title | truncate: 50 }}
-            </small>
-          </a>
-          <small class="text-muted">{{ post.date | date: "%b %d, %Y" }}</small>
-        </div>
-
-      </div>
-      {% endfor %}
-    </div>
+  <!-- FEATURED IMAGE -->
+  {% if page.image %}
+  <div class="mb-4">
+    <img 
+      src="{{ page.image | relative_url }}" 
+      alt="{{ page.title }}" 
+      class="img-fluid rounded shadow-sm w-100"
+      loading="lazy"
+    >
   </div>
+  {% endif %}
 
-
-  <!-- 🆕 RECENT POSTS -->
+  <!-- RECENT POSTS -->
   <div class="card border-0 shadow-sm mb-4">
     <div class="card-body">
-      <h5 class="fw-bold mb-3">🆕 Recent</h5>
+      <h5 class="fw-bold mb-3">Recent Articles</h5>
 
       {% for post in site.posts limit:5 %}
         {% if post.url != page.url %}
         <div class="d-flex mb-3">
 
           {% if post.image %}
-          <div class="me-2" style="width:80px;">
+          <div class="me-2" style="width:80px; flex-shrink:0;">
             <img 
               src="{{ post.image | relative_url }}" 
               class="img-fluid rounded"
@@ -59,7 +38,10 @@
                 {{ post.title | truncate: 50 }}
               </small>
             </a>
-            <small class="text-muted">{{ post.date | date: "%b %d, %Y" }}</small>
+
+            <small class="text-muted">
+              {{ post.date | date: "%b %d, %Y" }}
+            </small>
           </div>
 
         </div>
@@ -69,44 +51,39 @@
     </div>
   </div>
 
-
-  <!-- 📂 CATEGORIES -->
+  <!-- CATEGORY LIST -->
   <div class="card border-0 shadow-sm mb-4">
     <div class="card-body">
-      <h5 class="fw-bold mb-3">📂 Categories</h5>
+      <h5 class="fw-bold mb-3">Categories</h5>
 
       <ul class="list-unstyled mb-0">
         {% for category in site.categories %}
-        <li class="mb-2 d-flex justify-content-between">
+        <li class="mb-2">
           <a href="/categories/{{ category[0] | slugify }}/" class="text-decoration-none">
-            {{ category[0] }}
+            {{ category[0] }} 
+            <span class="text-muted">({{ category[1].size }})</span>
           </a>
-          <span class="badge bg-light text-dark">{{ category[1].size }}</span>
         </li>
         {% endfor %}
       </ul>
     </div>
   </div>
 
-
-  <!-- 🏷️ TAG CLOUD -->
-  <div class="card border-0 shadow-sm mb-4">
-    <div class="card-body">
-      <h5 class="fw-bold mb-3">🏷️ Tags</h5>
-
-      <div class="d-flex flex-wrap gap-2">
-        {% assign tags = site.tags %}
-        {% for tag in tags %}
-        <a 
-          href="/tags/{{ tag[0] | slugify }}/"
-          class="badge bg-light text-dark text-decoration-none"
-        >
-          {{ tag[0] }}
-        </a>
-        {% endfor %}
-      </div>
-
+  <!-- FACEBOOK -->
+  {% if site.fb-like-box %}
+  <div class="card border-0 shadow-sm">
+    <div class="card-body p-2">
+      <div
+        class="fb-page"
+        data-href="{{site.fb-page-url}}"
+        data-width="100%"
+        data-small-header="true"
+        data-adapt-container-width="true"
+        data-hide-cover="true"
+        data-show-facepile="true"
+      ></div>
     </div>
   </div>
+  {% endif %}
 
 </div>

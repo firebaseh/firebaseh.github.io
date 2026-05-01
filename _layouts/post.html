@@ -2,84 +2,84 @@
 layout: default
 ---
 
-<div class="w-100 py-4">
+<div class="container py-4">
+  <div class="row">
 
-  <!-- MAIN CONTENT -->
-  <div class="col-lg-8">
+    <!-- MAIN CONTENT -->
+    <div class="col-lg-8">
 
-    <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+      <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
 
-      <!-- IMAGE -->
-      {% if page.image %}
-      <div class="mb-4">
-        <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="img-fluid rounded w-100"
-          loading="lazy">
-      </div>
-      {% endif %}
-
-      <!-- TITLE -->
-      <header class="mb-3">
-        <h1 class="fw-bold" itemprop="headline">
-          {{ page.title }}
-        </h1>
-
-        <div class="text-muted small">
-          <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-            {{ page.date | date: "%B %-d, %Y" }}
-          </time>
-
-          {% if page.author %}
-          • <span itemprop="author">{{ page.author }}</span>
-          {% endif %}
+        <!-- IMAGE -->
+        {% if page.image %}
+        <div class="mb-4">
+          <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="img-fluid rounded w-100"
+            loading="lazy">
         </div>
-      </header>
+        {% endif %}
 
-      <!-- CONTENT -->
-      <div class="post-content mb-4" itemprop="articleBody">
-        {{ content }}
+        <!-- TITLE -->
+        <header class="mb-3">
+          <h1 class="fw-bold" itemprop="headline">
+            {{ page.title }}
+          </h1>
+
+          <div class="text-muted small">
+            <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+              {{ page.date | date: "%B %-d, %Y" }}
+            </time>
+
+            {% if page.author %}
+            • <span itemprop="author">{{ page.author }}</span>
+            {% endif %}
+          </div>
+        </header>
+
+        <!-- CONTENT -->
+        <div class="post-content mb-4" itemprop="articleBody">
+          {{ content }}
+        </div>
+
+      </article>
+
+      <!-- SHARE -->
+      <div class="d-flex gap-2 mb-4">
+        <a href="https://wa.me/?text={{ page.title | url_encode }} {{ site.url }}{{ page.url }}" target="_blank"
+          class="btn btn-success btn-sm px-3">
+          Share WA
+        </a>
+
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url }}" target="_blank"
+          class="btn btn-primary btn-sm px-3">
+          Share FB
+        </a>
       </div>
 
-    </article>
+      <!-- NEXT PREV -->
+      <nav class="mb-5">
+        <ul class="pagination justify-content-between">
 
-    <!-- SHARE -->
-    <div class="d-flex gap-2 mb-4">
-      <a href="https://wa.me/?text={{ page.title | url_encode }} {{ site.url }}{{ page.url }}" target="_blank"
-        class="btn btn-success btn-sm px-3">
-        Share WA
-      </a>
+          {% if page.previous.url %}
+          <li class="page-item">
+            <a class="page-link" href="{{ page.previous.url | relative_url }}">
+              &laquo; {{ page.previous.title | truncate: 40 }}
+            </a>
+          </li>
+          {% endif %}
 
-      <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url }}" target="_blank"
-        class="btn btn-primary btn-sm px-3">
-        Share FB
-      </a>
-    </div>
+          {% if page.next.url %}
+          <li class="page-item ms-auto">
+            <a class="page-link" href="{{ page.next.url | relative_url }}">
+              {{ page.next.title | truncate: 40 }} &raquo;
+            </a>
+          </li>
+          {% endif %}
 
-    <!-- NEXT PREV -->
-    <nav class="mb-5">
-      <ul class="pagination justify-content-between">
+        </ul>
+      </nav>
 
-        {% if page.previous.url %}
-        <li class="page-item">
-          <a class="page-link" href="{{ page.previous.url | relative_url }}">
-            &laquo; {{ page.previous.title | truncate: 40 }}
-          </a>
-        </li>
-        {% endif %}
-
-        {% if page.next.url %}
-        <li class="page-item ms-auto">
-          <a class="page-link" href="{{ page.next.url | relative_url }}">
-            {{ page.next.title | truncate: 40 }} &raquo;
-          </a>
-        </li>
-        {% endif %}
-
-      </ul>
-    </nav>
-
-    <!-- RELATED POSTS PRO -->
-    <div class="mb-5">
-      <div class="related-posts">
+      <!-- RELATED POSTS PRO -->
+      <div class="mb-5">
         <h5 class="fw-bold mb-3">Related Posts</h5>
 
         <div class="row g-3">
@@ -149,16 +149,17 @@ layout: default
           {% endfor %}
         </div>
         {% endif %}
+
       </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="col-lg-4">
+      {% include sidebar.html %}
     </div>
 
   </div>
-
-  <!-- SIDEBAR -->
-  <div class="col-lg-4">
-    {% include sidebar.html %}
-  </div>
-
 </div>
 
 {% include fb-script.html %}
