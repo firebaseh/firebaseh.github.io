@@ -44,6 +44,30 @@ layout: default
 
       </article>
 
+      <!-- NEXT PREV -->
+      <nav class="mb-5">
+        <ul class="pagination justify-content-between">
+
+          {% if page.previous.url %}
+          <li class="page-item">
+            <a class="page-link" href="{{ page.previous.url | relative_url }}">
+              &laquo; {{ page.previous.title | truncate: 40 }}
+            </a>
+          </li>
+          {% endif %}
+
+          {% if page.next.url %}
+          <li class="page-item ms-auto">
+            <a class="page-link" href="{{ page.next.url | relative_url }}">
+              {{ page.next.title | truncate: 40 }} &raquo;
+            </a>
+          </li>
+          {% endif %}
+
+        </ul>
+      </nav>
+
+
       <!-- SHARE -->
       <div class="d-flex flex-wrap gap-2 mb-4">
 
@@ -84,28 +108,6 @@ layout: default
 
       </div>
 
-      <!-- NEXT PREV -->
-      <nav class="mb-5">
-        <ul class="pagination justify-content-between">
-
-          {% if page.previous.url %}
-          <li class="page-item">
-            <a class="page-link" href="{{ page.previous.url | relative_url }}">
-              &laquo; {{ page.previous.title | truncate: 40 }}
-            </a>
-          </li>
-          {% endif %}
-
-          {% if page.next.url %}
-          <li class="page-item ms-auto">
-            <a class="page-link" href="{{ page.next.url | relative_url }}">
-              {{ page.next.title | truncate: 40 }} &raquo;
-            </a>
-          </li>
-          {% endif %}
-
-        </ul>
-      </nav>
 
       <!-- RELATED POSTS PRO -->
       <div class="mb-5">
