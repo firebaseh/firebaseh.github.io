@@ -1,8 +1,9 @@
 ---
-layout: default
+layout: base
 ---
 
-{% include header_two.html %}
-{% include page_breadcrumb.html %}
- {{content}}
-{% include footer_two.html %}
+<div class="flex justify-center py-4 md:py-8">
+  <article class="text-center prose md:prose-lg prose-p:font-extralight prose-headings:font-light prose-slate dark:prose-invert">
+  {{ content }}
+  </article>
+</div>
