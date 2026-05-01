@@ -45,16 +45,43 @@ layout: default
       </article>
 
       <!-- SHARE -->
-      <div class="d-flex gap-2 mb-4">
+      <div class="d-flex flex-wrap gap-2 mb-4">
+
+        <!-- WhatsApp -->
         <a href="https://wa.me/?text={{ page.title | url_encode }} {{ site.url }}{{ page.url }}" target="_blank"
           class="btn btn-success btn-sm px-3">
-          Share WA
+          WA
         </a>
 
+        <!-- Facebook -->
         <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url }}" target="_blank"
           class="btn btn-primary btn-sm px-3">
-          Share FB
+          FB
         </a>
+
+        <!-- Twitter / X -->
+        <a href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ site.url }}{{ page.url }}"
+          target="_blank" class="btn btn-dark btn-sm px-3">
+          X
+        </a>
+
+        <!-- Telegram -->
+        <a href="https://t.me/share/url?url={{ site.url }}{{ page.url }}&text={{ page.title | url_encode }}"
+          target="_blank" class="btn btn-info btn-sm px-3">
+          TG
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url }}" target="_blank"
+          class="btn btn-secondary btn-sm px-3">
+          IN
+        </a>
+
+        <!-- COPY LINK -->
+        <button onclick="copyLink()" class="btn btn-outline-dark btn-sm px-3">
+          Copy
+        </button>
+
       </div>
 
       <!-- NEXT PREV -->
@@ -164,4 +191,10 @@ layout: default
   </div>
 </div>
 
-{% include fb-script.html %}
+<script>
+  function copyLink() {
+    const url = "{{ site.url }}{{ page.url }}";
+    navigator.clipboard.writeText(url);
+    alert("Link copied!");
+  }
+</script>
