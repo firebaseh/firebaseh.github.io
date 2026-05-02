@@ -1,0 +1,43 @@
+---
+title: "404"
+layout: default
+permalink: /404.html
+---
+
+<div class="container text-center" style="padding:60px 20px;">
+    <h1 style="font-size:8rem; font-weight:bold;"><strong>404</strong></h1>
+    <h3 class="mb-3"><strong>Page Not Found :(</strong></h3>
+
+    <p class="mb-4">
+        The page you're looking for doesn't exist, but here's something you might like.
+    </p>
+
+    <!-- RANDOM POST -->
+    {% assign random_posts = site.posts | sample:12 %}
+
+    <div class="row">
+        {% for post in random_posts %}
+        <div class="col-md-3 mb-4">
+
+            <a href="{{ site.baseurl }}{{ post.url }}">
+
+                {% if post.image %}
+                {% if post.image contains 'http' %}
+                <img src="{{ post.image }}" class="img-fluid ratio-4x3 mb-2">
+                {% else %}
+                <img src="{{ site.baseurl }}/{{ post.image }}" class="img-fluid ratio-4x3 mb-2">
+                {% endif %}
+                {% endif %}
+                <h6 class="text-dark text-center">
+                    {{ post.title | truncate: 60 }}
+                </h6>
+            </a>
+        </div>
+        {% endfor %}
+   </div>
+
+    <a href="{{ site.baseurl }}/" class="btn btn-success mt-3">
+        Back to Home
+    </a>
+
+</div>
