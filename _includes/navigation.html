@@ -34,27 +34,31 @@
             Categories
           </a>
           <ul class="dropdown-menu border-0 shadow-sm text-center text-lg-start">
-            <li><a class="dropdown-item" href="/categories/aesthetic/">Aesthetic</a></li>
-            <li><a class="dropdown-item" href="/categories/background/">Background</a></li>
-            <li><a class="dropdown-item" href="/categories/car/">Car</a></li>
-            <li><a class="dropdown-item" href="/categories/flower/">Flower</a></li>
-            <li><a class="dropdown-item" href="/categories/landscape/">Landscape</a></li>
-            <li><a class="dropdown-item" href="/categories/nature/">Nature</a></li>
-            <li><a class="dropdown-item" href="/categories/wallpaper/">Wallpaper</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+
+            <li><a class="dropdown-item" href="{{ '/categories/aesthetic/' | relative_url }}">Aesthetic</a></li>
+            <li><a class="dropdown-item" href="{{ '/categories/background/' | relative_url }}">Background</a></li>
+            <li><a class="dropdown-item" href="{{ '/categories/car/' | relative_url }}">Car</a></li>
+            <li><a class="dropdown-item" href="{{ '/categories/flower/' | relative_url }}">Flower</a></li>
+            <li><a class="dropdown-item" href="{{ '/categories/landscape/' | relative_url }}">Landscape</a></li>
+            <li><a class="dropdown-item" href="{{ '/categories/nature/' | relative_url }}">Nature</a></li>
+            <li><a class="dropdown-item" href="{{ '/categories/wallpaper/' | relative_url }}">Wallpaper</a></li>
+
+            <li><hr class="dropdown-divider"></li>
+
             <li>
               <a class="dropdown-item" target="_blank" href="https://aridjaya.com/hijab/">
                 Hijab
               </a>
             </li>
+
           </ul>
         </li>
 
         <!-- CTA BUTTON -->
         <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
-          <a class="btn btn-primary w-100 w-lg-auto px-3" href="/sitemap/">Sitemap</a>
+          <a class="btn btn-primary w-100 w-lg-auto px-3" href="{{ '/sitemap/' | relative_url }}">
+            Sitemap
+          </a>
         </li>
 
       </ul>

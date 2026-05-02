@@ -2,199 +2,198 @@
 layout: default
 ---
 
-<div class="py-4">
-  <div class="row">
+<div class="row">
 
-    <!-- MAIN CONTENT -->
-    <div class="col-lg-8">
+  <!-- MAIN CONTENT -->
+  <div class="col-lg-8">
 
-      <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
+    <article class="post" itemscope itemtype="https://schema.org/BlogPosting">
 
-        <!-- IMAGE -->
-        {% if page.image %}
-        <div class="mb-4">
-          <a href="https://aridjaya.com">
-            <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="img-fluid rounded w-100"
-              loading="lazy">
+      <!-- IMAGE -->
+      {% if page.image %}
+      <div class="mb-4">
+        <a href="https://aridjaya.com">
+          <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="img-fluid rounded w-100"
+            loading="lazy">
+        </a>
+      </div>
+      {% endif %}
+
+      <!-- TITLE -->
+      <header class="mb-3">
+        <h1 class="fw-bold text-capitalize" itemprop="headline">
+          {{ page.title }}
+        </h1>
+
+        <div class="text-muted small">
+          <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+            {{ page.date | date: "%B %-d, %Y" }}
+          </time>
+
+          {% if page.author %}
+          • <span itemprop="author">{{ page.author }}</span>
+          {% endif %}
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <div class="post-content mb-4" itemprop="articleBody">
+        {{ content }}
+      </div>
+
+    </article>
+
+    <!-- Read More -->
+    <div id="readmore" class="readmore" style="display:none;">
+      {% include readmore.html %}
+    </div>
+
+    <!-- SHARE -->
+    <div class="share mb-5">
+      <h6 class="fw-semibold mb-3">Share</h6>
+
+      <div class="d-flex flex-wrap gap-2">
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/?text={{ page.title | url_encode }}%20{{ site.url }}{{ page.url }}" target="_blank"
+          rel="noopener" class="btn btn-success btn-sm d-flex align-items-center gap-2">
+          <i class="fab fa-whatsapp"></i></a>
+
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url }}" target="_blank"
+          rel="noopener" class="btn btn-primary btn-sm d-flex align-items-center gap-2">
+          <i class="fab fa-facebook-f"></i></a>
+
+        <!-- Twitter / X -->
+        <a href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ site.url }}{{ page.url }}"
+          target="_blank" rel="noopener" class="btn btn-dark btn-sm d-flex align-items-center gap-2">
+          <i class="fab fa-x-twitter"></i></a>
+
+        <!-- Telegram -->
+        <a href="https://t.me/share/url?url={{ site.url }}{{ page.url }}&text={{ page.title | url_encode }}"
+          target="_blank" rel="noopener" class="btn btn-info btn-sm d-flex align-items-center gap-2">
+          <i class="fab fa-telegram"></i></a>
+
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url }}" target="_blank"
+          rel="noopener" class="btn btn-secondary btn-sm d-flex align-items-center gap-2">
+          <i class="fab fa-linkedin-in"></i></a>
+
+        <!-- Copy Link -->
+        <button onclick="copyLink()" class="btn btn-outline-dark btn-sm d-flex align-items-center gap-2">
+          <i class="fa fa-link"></i> Copy
+        </button>
+
+      </div>
+    </div>
+
+    <!-- NEXT PREV -->
+    <nav class="mb-5">
+      <ul class="pagination justify-content-between">
+
+        {% if page.previous.url %}
+        <li class="page-item">
+          <a class="page-link" href="{{ page.previous.url | relative_url }}">
+            &laquo; {{ page.previous.title | truncate: 40 }}
+          </a>
+        </li>
+        {% endif %}
+
+        {% if page.next.url %}
+        <li class="page-item ms-auto">
+          <a class="page-link" href="{{ page.next.url | relative_url }}">
+            {{ page.next.title | truncate: 40 }} &raquo;
+          </a>
+        </li>
+        {% endif %}
+
+      </ul>
+    </nav>
+
+    <!-- RELATED POSTS PRO -->
+    <div class="related-posts mb-5">
+      <h6 class="fw-bold mb-3">Related Posts</h6>
+
+      <div class="row g-3">
+
+        {% assign maxRelated = 8 %}
+        {% assign minCommonTags = 1 %}
+        {% assign relatedCount = 0 %}
+
+        {% for post in site.posts %}
+        {% if post.url != page.url %}
+
+        {% assign sameCategory = false %}
+        {% for cat in post.categories %}
+        {% if page.categories contains cat %}
+        {% assign sameCategory = true %}
+        {% endif %}
+        {% endfor %}
+
+        {% assign sameTagCount = 0 %}
+        {% for tag in post.tags %}
+        {% if page.tags contains tag %}
+        {% assign sameTagCount = sameTagCount | plus: 1 %}
+        {% endif %}
+        {% endfor %}
+
+        {% if sameCategory or sameTagCount >= minCommonTags %}
+
+        {% if relatedCount < maxRelated %}
+        <div class="col-6 col-md-3">
+          <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
+
+            {% if post.image %}
+            <img class='img-fluid rounded mb-2 ratio ratio-4x3 mb-2' src="{{ post.image | relative_url }}"
+              style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy" />
+            {% endif %}
+
+            <small class="d-block">
+              {{ post.title | truncate: 45 }}
+            </small>
+
+          </a>
+        </div>
+
+        {% assign relatedCount = relatedCount | plus: 1 %}
+        {% endif %}
+
+        {% endif %}
+
+        {% endif %}
+        {% endfor %}
+
+      </div>
+
+      <!-- FALLBACK kalau kosong -->
+      {% if relatedCount == 0 %}
+      <div class="row g-3">
+        {% for post in site.posts limit:8 %}
+        {% if post.url != page.url %}
+        <div class="col-6 col-md-3">
+          <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
+            {% if post.image %}
+            <img src="{{ post.image | relative_url }}" class="img-fluid rounded mb-2">
+            {% endif %}
+            <small>{{ post.title | truncate: 45 }}</small>
           </a>
         </div>
         {% endif %}
-
-        <!-- TITLE -->
-        <header class="mb-3">
-          <h1 class="fw-bold text-capitalize" itemprop="headline">
-            {{ page.title }}
-          </h1>
-
-          <div class="text-muted small">
-            <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-              {{ page.date | date: "%B %-d, %Y" }}
-            </time>
-
-            {% if page.author %}
-            • <span itemprop="author">{{ page.author }}</span>
-            {% endif %}
-          </div>
-        </header>
-
-        <!-- CONTENT -->
-        <div class="post-content mb-4" itemprop="articleBody">
-          {{ content }}
-        </div>
-
-      </article>
-
-      <!-- Read More -->
-      <div id="readmore" class="readmore" style="display:none;">
-        {% include readmore.html %}
+        {% endfor %}
       </div>
-
-      <!-- SHARE -->
-      <div class="share mb-5">
-        <h6 class="fw-semibold mb-3">Share</h6>
-
-        <div class="d-flex flex-wrap gap-2">
-
-          <!-- WhatsApp -->
-          <a href="https://wa.me/?text={{ page.title | url_encode }}%20{{ site.url }}{{ page.url }}" target="_blank"
-            rel="noopener" class="btn btn-success btn-sm d-flex align-items-center gap-2">
-            <i class="fab fa-whatsapp"></i></a>
-
-          <!-- Facebook -->
-          <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url }}" target="_blank"
-            rel="noopener" class="btn btn-primary btn-sm d-flex align-items-center gap-2">
-            <i class="fab fa-facebook-f"></i></a>
-
-          <!-- Twitter / X -->
-          <a href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ site.url }}{{ page.url }}"
-            target="_blank" rel="noopener" class="btn btn-dark btn-sm d-flex align-items-center gap-2">
-            <i class="fab fa-x-twitter"></i></a>
-
-          <!-- Telegram -->
-          <a href="https://t.me/share/url?url={{ site.url }}{{ page.url }}&text={{ page.title | url_encode }}"
-            target="_blank" rel="noopener" class="btn btn-info btn-sm d-flex align-items-center gap-2">
-            <i class="fab fa-telegram"></i></a>
-
-          <!-- LinkedIn -->
-          <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url }}" target="_blank"
-            rel="noopener" class="btn btn-secondary btn-sm d-flex align-items-center gap-2">
-            <i class="fab fa-linkedin-in"></i></a>
-
-          <!-- Copy Link -->
-          <button onclick="copyLink()" class="btn btn-outline-dark btn-sm d-flex align-items-center gap-2">
-            <i class="fa fa-link"></i> Copy
-          </button>
-
-        </div>
-      </div>
-
-      <!-- NEXT PREV -->
-      <nav class="mb-5">
-        <ul class="pagination justify-content-between">
-
-          {% if page.previous.url %}
-          <li class="page-item">
-            <a class="page-link" href="{{ page.previous.url | relative_url }}">
-              &laquo; {{ page.previous.title | truncate: 40 }}
-            </a>
-          </li>
-          {% endif %}
-
-          {% if page.next.url %}
-          <li class="page-item ms-auto">
-            <a class="page-link" href="{{ page.next.url | relative_url }}">
-              {{ page.next.title | truncate: 40 }} &raquo;
-            </a>
-          </li>
-          {% endif %}
-
-        </ul>
-      </nav>
-
-      <!-- RELATED POSTS PRO -->
-      <div class="related-posts mb-5">
-        <h6 class="fw-bold mb-3">Related Posts</h6>
-
-        <div class="row g-3">
-
-          {% assign maxRelated = 8 %}
-          {% assign minCommonTags = 1 %}
-          {% assign relatedCount = 0 %}
-
-          {% for post in site.posts %}
-          {% if post.url != page.url %}
-
-          {% assign sameCategory = false %}
-          {% for cat in post.categories %}
-          {% if page.categories contains cat %}
-          {% assign sameCategory = true %}
-          {% endif %}
-          {% endfor %}
-
-          {% assign sameTagCount = 0 %}
-          {% for tag in post.tags %}
-          {% if page.tags contains tag %}
-          {% assign sameTagCount = sameTagCount | plus: 1 %}
-          {% endif %}
-          {% endfor %}
-
-          {% if sameCategory or sameTagCount >= minCommonTags %}
-
-          {% if relatedCount < maxRelated %}
-          <div class="col-6 col-md-3">
-            <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
-
-              {% if post.image %}
-              <img class='img-fluid rounded mb-2 ratio ratio-4x3 mb-2' src="{{ post.image | relative_url }}"
-                style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy" />
-              {% endif %}
-
-              <small class="d-block">
-                {{ post.title | truncate: 45 }}
-              </small>
-
-            </a>
-          </div>
-
-          {% assign relatedCount = relatedCount | plus: 1 %}
-          {% endif %}
-
-          {% endif %}
-
-          {% endif %}
-          {% endfor %}
-
-        </div>
-
-        <!-- FALLBACK kalau kosong -->
-        {% if relatedCount == 0 %}
-        <div class="row g-3">
-          {% for post in site.posts limit:8 %}
-          {% if post.url != page.url %}
-          <div class="col-6 col-md-3">
-            <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
-              {% if post.image %}
-              <img src="{{ post.image | relative_url }}" class="img-fluid rounded mb-2">
-              {% endif %}
-              <small>{{ post.title | truncate: 45 }}</small>
-            </a>
-          </div>
-          {% endif %}
-          {% endfor %}
-        </div>
-        {% endif %}
-      </div>
-
-
+      {% endif %}
     </div>
 
-    <!-- SIDEBAR -->
-    <div class="col-lg-4">
-      {% include sidebar.html %}
-    </div>
 
   </div>
+
+  <!-- SIDEBAR -->
+  <div class="col-lg-4">
+    {% include sidebar.html %}
+  </div>
+
 </div>
+
 
 <script>
   function copyLink() {

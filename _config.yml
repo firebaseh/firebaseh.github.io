@@ -6,65 +6,37 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: Firebaseh
-email: your-email@domain.com
-description: > # this means to ignore newlines until "baseurl:"
-  Firebaseh is a Bootstrap based jekyll theme for portfolio, photography or any kind of blog.
-  
-  
-# baseurl: "/" # the subpath of your site, e.g. /blog
-url: "http://firebaseh.github.io" # the base hostname & protocol for your site
+title: Aridjaya
+email: admin@aridjaya.com
+description: >
+  A collection of high-quality HD, Full HD, and 4K wallpapers featuring nature landscapes, mountains, forests, beaches, sunsets, city views, and aesthetic designs.
 
-# post for future
-future: false
+url: "https://firebase.github.io"
+baseurl: "/"
+
 timezone: Asia/Jakarta
 
-# sidebar
-default-image: logo.jpg # If there is no featured image in a post then this image will be showed. Also on all pages this image will be showed. Use a 500x250 image.
+future: false
 
-# footer
+default-image: logo.jpg
 
-built-by: firebaseh
+built-by: firebase
 
 copyright:
-   name: firebaseh
-   link: 'http://firebaseh.github.io'
+  name: aridjaya
+  link: "https://firebase.github.io"
 
-# Build settings
 markdown: kramdown
 permalink: /:title/
+
 paginate: 6
 paginate_path: /page:num/
 
-# Tracker
-analytics: UA-83979019-1
-
-# Comments
-disqus: yes
-disqus-shortname: firebaseh
-
-# social
-facebook: http://facebook.com/
-quora: http://quora.com/
-twitter: http://twitter.com/
-github: http://github.com/
-email: your@email.com
-
-# facebook like box
-fb-like-box: yes
-fb-app-id: 549480635219583
-fb-page-url: https://www.facebook.com/webjeda/
-fb-page-title: Firebaseh
-
-# Sass style
 sass:
   style: compressed
 
-# Ruby Gems
-plugins: 
+plugins:
   - jekyll-paginate
   - jekyll-seo-tag
   - jekyll-feed
   - jekyll-sitemap
-
-

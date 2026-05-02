@@ -11,8 +11,10 @@
 
         {% if post.image %}
         <div class="me-2">
-          <img src="{{ post.image | relative_url }}" class="rounded"
-            style="min-width: 120px; height: 75px; object-fit: cover;" loading="lazy">
+          <a href="{{ post.url | relative_url }}">
+            <img src="{{ post.image | relative_url }}" class="rounded"
+              style="min-width: 120px; height: 75px; object-fit: cover;" loading="lazy">
+          </a>
         </div>
         {% endif %}
 
@@ -42,7 +44,8 @@
       <ul class="list-unstyled mb-0">
         {% for category in site.categories %}
         <li class="mb-2 d-flex justify-content-between">
-          <a href="/categories/{{ category[0] | slugify }}/" class="text-capitalize text-decoration-none">
+          <a href="{{ '/categories/' | append: category[0] | append: '/' | slugify | relative_url }}"
+            class="text-capitalize text-decoration-none">
             {{ category[0] }}
           </a>
           <span class="badge bg-light text-dark">
@@ -54,20 +57,17 @@
     </div>
   </div>
 
-
   <!-- STICKY WIDGET -->
   <div id="sidebar-sticky" class="col-lg-4 mt-4 mt-lg-0 w-100">
+    <div class="card border shadow-sm bg-light">
+      <div class="card-body">
+        <h5 class="fw-bold mb-3">Featured</h5>
 
-  <div class="card border shadow-sm bg-light">
-    <div class="card-body">
-      <h5 class="fw-bold mb-3">Featured</h5>
-
-      <p class="small text-muted mb-2 text-center">
-        {% include adsidebar.html %}
-      </p>
+        <p class="small text-muted mb-2 text-center">
+          {% include adsidebar.html %}
+        </p>
+      </div>
     </div>
   </div>
-
-</div>
 
 </div>

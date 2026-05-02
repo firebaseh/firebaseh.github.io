@@ -1,68 +1,30 @@
-name: Jekyll Deploy + SEO Auto Ping + IndexNow
+name: Jekyll Deploy Clean
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.1"
-          bundler-cache: true
+          ruby-version: "3.2"
+          bundler-cache: false
 
-      - name: Install dependencies
+      - name: Install bundler
+        run: gem install bundler
+
+      - name: Clean
+        run: rm -rf Gemfile.lock vendor _site .jekyll-cache
+
+      - name: Install deps
         run: bundle install
 
-      - name: Build Jekyll
+      - name: Build
         run: bundle exec jekyll build
-
-      # =========================
-      # 🔵 GOOGLE + BING PING (SITEMAP + RSS)
-      # =========================
-      - name: Ping Google + Bing
-        run: |
-          SITE="https://firebaseh.github.io"
-
-          echo "🔵 Google Sitemap Ping"
-          curl "https://www.google.com/ping?sitemap=${SITE}/sitemap-index.xml"
-
-          echo "🔵 Bing Sitemap Ping"
-          curl "https://www.bing.com/ping?sitemap=${SITE}/sitemap-index.xml"
-
-          echo "🟢 Google RSS Ping"
-          curl "https://www.google.com/ping?sitemap=${SITE}/feed.xml"
-
-          echo "🟢 Bing RSS Ping"
-          curl "https://www.bing.com/ping?sitemap=${SITE}/feed.xml"
-
-      # =========================
-      # ⚡ INDEXNOW (BING + YANDEX REAL-TIME)
-      # =========================
-      - name: IndexNow Submit
-        run: |
-          SITE="https://firebaseh.github.io"
-          KEY="639671a75c2147f593d1fbee7b1162d1"
-
-          echo "⚡ Submitting IndexNow"
-
-          curl -X POST "https://api.indexnow.org/indexnow" \
-          -H "Content-Type: application/json" \
-          -d '{
-            "host": "firebaseh.github.io",
-            "key": "'"$KEY"'",
-            "urlList": [
-              "'"$SITE"'/",
-              "'"$SITE"'/feed.xml",
-              "'"$SITE"'/sitemap-index.xml"
-            ]
-          }'
-
-          echo "✅ IndexNow Done"

@@ -4,163 +4,154 @@ layout: default
 
 {% assign now = site.time | date: "%s" %}
 
-<div class="py-4">
+<div class="row g-3" id="post-container">
 
-  <div class="row g-3" id="post-container">
+  {% assign visible_count = 0 %}
 
-    {% assign visible_count = 0 %}
+  {% for post in paginator.posts %}
 
-    {% for post in paginator.posts %}
+  {% assign publish_time = post.publish_at | date: "%s" %}
 
-      {% assign publish_time = post.publish_at | date: "%s" %}
+  {% if post.publish_at == nil or publish_time <= now %}
 
-      {% if post.publish_at == nil or publish_time <= now %}
+  {% assign visible_count = visible_count | plus: 1 %}
 
-        {% assign visible_count = visible_count | plus: 1 %}
+  <div class="col-12 col-md-6 col-lg-4 post-item" data-category="{{ post.categories | join: ' ' }}">
 
-        <div class="col-12 col-md-6 col-lg-4 post-item"
-             data-category="{{ post.categories | join: ' ' }}">
+    <div class="card border border-1 bg-light h-100 card-hover shadow-none">
 
-          <div class="card border border-1 bg-light h-100 card-hover">
+      <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
 
-            <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
+        {% if post.image %}
+        <div class="overflow-hidden position-relative">
 
-              {% if post.image %}
-              <div class="overflow-hidden position-relative">
+          {% assign post_time = post.date | date: "%s" %}
+          {% assign diff = now | minus: post_time %}
 
-                {% assign post_time = post.date | date: "%s" %}
-                {% assign diff = now | minus: post_time %}
+          {% if diff < 604800 %}
+          <span class="badge bg-danger position-absolute m-2">NEW</span>
+          {% endif %}
 
-                {% if diff < 604800 %}
-                <span class="badge bg-danger position-absolute m-2">NEW</span>
-                {% endif %}
+          <img src="{{ post.image | relative_url }}" class="card-img-top" style="aspect-ratio: 4/3; object-fit: cover;"
+            loading="lazy">
+        </div>
+        {% endif %}
 
-                <img src="{{ post.image | relative_url }}"
-                     class="card-img-top"
-                     style="aspect-ratio: 4/3; object-fit: cover;"
-                     loading="lazy">
-              </div>
-              {% endif %}
+        <div class="card-body">
+          <h4 class="fw-semibold mb-2 text-capitalize">
+            {{ post.title }}
+          </h4>
 
-              <div class="card-body">
-                <h4 class="fw-semibold mb-2 text-capitalize">
-                  {{ post.title }}
-                </h4>
+          <small class="text-muted d-block mb-2">
+            {{ post.date | date: "%b %-d, %Y" }}
+          </small>
 
-                <small class="text-muted d-block mb-2">
-                  {{ post.date | date: "%b %-d, %Y" }}
-                </small>
-
-                <p class="excerpt">
-                  {{ post.excerpt | strip_html | truncate: 100 }}
-                </p>
-              </div>
-
-            </a>
-
-          </div>
-
+          <p class="excerpt">
+            {{ post.excerpt | strip_html | truncate: 100 }}
+          </p>
         </div>
 
+      </a>
+
+    </div>
+
+  </div>
+
+  {% endif %}
+
+  {% endfor %}
+
+  {% if visible_count == 0 %}
+  <div class="col-12 text-center text-muted py-5">
+    No posts available yet.
+  </div>
+  {% endif %}
+
+</div>
+
+<!-- PAGINATION -->
+<div class="container mt-5">
+
+  {% if paginator.total_pages > 1 %}
+
+  <nav>
+    <ul class="pagination justify-content-center">
+
+      <!-- PREV -->
+      {% if paginator.previous_page %}
+      <li class="page-item">
+        <a class="page-link" href="{{ paginator.previous_page_path | relative_url }}">&laquo;</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">&laquo;</span>
+      </li>
       {% endif %}
 
-    {% endfor %}
+      {% assign total = paginator.total_pages %}
+      {% assign current = paginator.page %}
+      {% assign delta = 2 %}
 
-    {% if visible_count == 0 %}
-      <div class="col-12 text-center text-muted py-5">
-        No posts available yet.
-      </div>
-    {% endif %}
+      {% assign start = current | minus: delta %}
+      {% assign end = current | plus: delta %}
 
-  </div>
+      {% if start < 1 %}{% assign start = 1 %}{% endif %}
+      {% if end > total %}{% assign end = total %}{% endif %}
 
-  <!-- PAGINATION -->
-  <div class="container mt-5">
+      {% if start > 1 %}
+      <li class="page-item">
+        <a class="page-link" href="{{ '/' | relative_url }}">1</a>
+      </li>
 
-    {% if paginator.total_pages > 1 %}
+      {% if start > 2 %}
+      <li class="page-item disabled">
+        <span class="page-link">...</span>
+      </li>
+      {% endif %}
+      {% endif %}
 
-    <nav>
-      <ul class="pagination justify-content-center">
+      {% for page in (start..end) %}
+      {% if page == current %}
+      <li class="page-item active">
+        <span class="page-link">{{ page }}</span>
+      </li>
+      {% else %}
+      <li class="page-item">
+        <a class="page-link" href="{{ site.paginate_path | relative_url | replace: ':num', page }}">
+          {{ page }}
+        </a>
+      </li>
+      {% endif %}
+      {% endfor %}
 
-        <!-- PREV -->
-        {% if paginator.previous_page %}
-        <li class="page-item">
-          <a class="page-link" href="{{ paginator.previous_page_path | relative_url }}">&laquo;</a>
-        </li>
-        {% else %}
-        <li class="page-item disabled">
-          <span class="page-link">&laquo;</span>
-        </li>
-        {% endif %}
+      {% if end < total %}
+      {% if end < total | minus: 1 %}
+      <li class="page-item disabled">
+        <span class="page-link">...</span>
+      </li>
+      {% endif %}
 
-        {% assign total = paginator.total_pages %}
-        {% assign current = paginator.page %}
-        {% assign delta = 2 %}
+      <li class="page-item">
+        <a class="page-link" href="{{ site.paginate_path | relative_url | replace: ':num', total }}">
+          {{ total }}
+        </a>
+      </li>
+      {% endif %}
 
-        {% assign start = current | minus: delta %}
-        {% assign end = current | plus: delta %}
+      <!-- NEXT -->
+      {% if paginator.next_page %}
+      <li class="page-item">
+        <a class="page-link" href="{{ paginator.next_page_path | relative_url }}">&raquo;</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <span class="page-link">&raquo;</span>
+      </li>
+      {% endif %}
 
-        {% if start < 1 %}{% assign start = 1 %}{% endif %}
-        {% if end > total %}{% assign end = total %}{% endif %}
+    </ul>
+  </nav>
 
-        {% if start > 1 %}
-          <li class="page-item">
-            <a class="page-link" href="{{ '/' | relative_url }}">1</a>
-          </li>
-
-          {% if start > 2 %}
-          <li class="page-item disabled">
-            <span class="page-link">...</span>
-          </li>
-          {% endif %}
-        {% endif %}
-
-        {% for page in (start..end) %}
-          {% if page == current %}
-            <li class="page-item active">
-              <span class="page-link">{{ page }}</span>
-            </li>
-          {% else %}
-            <li class="page-item">
-              <a class="page-link"
-                 href="{{ site.paginate_path | relative_url | replace: ':num', page }}">
-                {{ page }}
-              </a>
-            </li>
-          {% endif %}
-        {% endfor %}
-
-        {% if end < total %}
-          {% if end < total | minus: 1 %}
-          <li class="page-item disabled">
-            <span class="page-link">...</span>
-          </li>
-          {% endif %}
-
-          <li class="page-item">
-            <a class="page-link"
-               href="{{ site.paginate_path | relative_url | replace: ':num', total }}">
-              {{ total }}
-            </a>
-          </li>
-        {% endif %}
-
-        <!-- NEXT -->
-        {% if paginator.next_page %}
-        <li class="page-item">
-          <a class="page-link" href="{{ paginator.next_page_path | relative_url }}">&raquo;</a>
-        </li>
-        {% else %}
-        <li class="page-item disabled">
-          <span class="page-link">&raquo;</span>
-        </li>
-        {% endif %}
-
-      </ul>
-    </nav>
-
-    {% endif %}
-
-  </div>
+  {% endif %}
 
 </div>
