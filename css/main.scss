@@ -88,6 +88,14 @@ $on-laptop: 800px;
   opacity: 0.7;
 }
 
+.card {
+  border-radius: 10px;
+}
+
+.card-body {
+  padding: 12px;
+}
+
 .card-img-top {
   height: 240px;
   object-fit: cover;
@@ -98,6 +106,7 @@ $on-laptop: 800px;
   line-height: 1.8;
   margin-bottom: 1rem;
 }
+
 
 .post-content img {
   max-width: 100%;
@@ -129,9 +138,6 @@ $on-laptop: 800px;
 * Sidebar
 */
 
-.sidebar {
-}
-
 .sidebar .card {
   border-radius: 12px;
 }
@@ -146,14 +152,6 @@ $on-laptop: 800px;
 
 .sidebar a:hover {
   opacity: 0.75;
-}
-
-/* STICKY DESKTOP */
-@media(min-width: 992px) {
-  .sidebar-sticky {
-    position: sticky;
-    top: 90px;
-  }
 }
 
 /**
@@ -181,3 +179,48 @@ $on-laptop: 800px;
 .footer a:hover i {
   transform: scale(1.2);
 }
+
+/**
+* Responsive Mobile
+*/
+
+/* STICKY DESKTOP */
+@media(min-width: 992px) {
+  .sidebar-sticky {
+    position: sticky;
+    top: 90px;
+  }
+}
+
+@media (max-width: 991px) {
+
+  .sidebar-sticky {
+    position: relative;
+    top: 0;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  body {
+    font-size: 14px;
+  }
+
+  .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .card-img-top {
+    height: auto;
+    aspect-ratio: 4/3;
+  }
+
+  .post-content p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+}
+
