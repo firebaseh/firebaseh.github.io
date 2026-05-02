@@ -136,7 +136,7 @@ layout: default
             <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
 
               {% if post.image %}
-              <img src="{{ post.image | relative_url }}" class="img-fluid rounded mb-2" loading="lazy">
+              <img class='ratio ratio-4x3' src="{{ post.image | relative_url }}" class="img-fluid rounded mb-2" loading="lazy">
               {% endif %}
 
               <small class="d-block">
