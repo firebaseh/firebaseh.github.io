@@ -11,7 +11,7 @@ permalink: /404.html
     <p class="mb-4">
         The page you're looking for doesn't exist, but here's something you might like.
     </p>
-    
+
     <div class="col-12 col-md-6 col-lg-4 post-item">
         <!-- RANDOM POST -->
         {% assign random_posts = site.posts | sample:12 %}
@@ -32,9 +32,22 @@ permalink: /404.html
                         style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy">
                     {% endif %}
                     {% endif %}
-                    <h6 class="text-dark text-center">
-                        {{ post.title | truncate: 60 }}
-                    </h6>
+
+
+                    <div class="card-body">
+                        <h4 class="fw-semibold mb-2 text-capitalize">
+                            {{ post.title }}
+                        </h4>
+
+                        <small class="text-muted d-block mb-2">
+                            {{ post.date | date: "%b %-d, %Y" }}
+                        </small>
+
+                        <p class="text-secondary mb-2">
+                            {{ post.excerpt | strip_html | truncate: 100 }}
+                        </p>
+                    </div>
+
                 </a>
             </div>
             {% endfor %}
