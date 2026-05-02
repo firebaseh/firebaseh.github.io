@@ -48,6 +48,10 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  font-size: 14px;
+}
+
 .roboto {
   font-family: "Roboto", sans-serif;
   font-optical-sizing: auto;
@@ -216,10 +220,6 @@ html {
 }
 
 @media (max-width: 768px) {
-
-  body {
-    font-size: 14px;
-  }
 
   .card-img-top {
     height: auto;
