@@ -113,7 +113,7 @@ layout: default
 
         <div class="row g-3">
 
-          {% assign maxRelated = 6 %}
+          {% assign maxRelated = 8 %}
           {% assign minCommonTags = 1 %}
           {% assign relatedCount = 0 %}
 
@@ -137,7 +137,7 @@ layout: default
           {% if sameCategory or sameTagCount >= minCommonTags %}
 
           {% if relatedCount < maxRelated %}
-          <div class="col-6 col-md-4">
+          <div class="col-6 col-md-3">
             <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
 
               {% if post.image %}
