@@ -47,31 +47,41 @@ layout: default
 
       <!-- SHARE -->
       <div class="share mb-5">
-        <h5 class="fw-bold mb-3">Share This</h5>
-        <div class="d-flex flex-wrap gap-2 mb-4">
+        <h6 class="fw-semibold mb-3">Share</h6>
+
+        <div class="d-flex flex-wrap gap-2">
 
           <!-- WhatsApp -->
-          <a href="https://wa.me/?text={{ page.title | url_encode }} {{ site.url }}{{ page.url }}" target="_blank"
-            class="btn btn-success btn-sm px-3"><i class="fa fa-whatsapp"></i></a>
+          <a href="https://wa.me/?text={{ page.title | url_encode }}%20{{ site.url }}{{ page.url }}" target="_blank"
+            rel="noopener" class="btn btn-success btn-sm d-flex align-items-center gap-2">
+            <i class="fab fa-whatsapp"></i> WA
+          </a>
+
           <!-- Facebook -->
           <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url }}" target="_blank"
-            class="btn btn-primary btn-sm px-3"><i class="fa fa-facebook"></i></a>
+            rel="noopener" class="btn btn-primary btn-sm d-flex align-items-center gap-2">
+            <i class="fab fa-facebook-f"></i></a>
 
           <!-- Twitter / X -->
           <a href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ site.url }}{{ page.url }}"
-            target="_blank" class="btn btn-dark btn-sm px-3"><i class="fa fa-twitter"></i></a>
+            target="_blank" rel="noopener" class="btn btn-dark btn-sm d-flex align-items-center gap-2">
+            <i class="fab fa-x-twitter"></i></a>
 
           <!-- Telegram -->
           <a href="https://t.me/share/url?url={{ site.url }}{{ page.url }}&text={{ page.title | url_encode }}"
-            target="_blank" class="btn btn-info btn-sm px-3"><i class="fa fa-telegram"></i></a>
+            target="_blank" rel="noopener" class="btn btn-info btn-sm d-flex align-items-center gap-2">
+            <i class="fab fa-telegram"></i></a>
+
           <!-- LinkedIn -->
           <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url }}" target="_blank"
-            class="btn btn-secondary btn-sm px-3"><i class="fa fa-linkedin"></i>
-          </a>
-          <!-- COPY LINK -->
-          <button onclick="copyLink()" class="btn btn-outline-dark btn-sm px-3">
-            Copy
+            rel="noopener" class="btn btn-secondary btn-sm d-flex align-items-center gap-2">
+            <i class="fab fa-linkedin-in"></i></a>
+
+          <!-- Copy Link -->
+          <button onclick="copyLink()" class="btn btn-outline-dark btn-sm d-flex align-items-center gap-2">
+            <i class="fa fa-link"></i> Copy
           </button>
+
         </div>
       </div>
 
@@ -136,7 +146,8 @@ layout: default
             <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
 
               {% if post.image %}
-              <img class='ratio ratio-4x3 mb-2' src="{{ post.image | relative_url }}" class="img-fluid rounded mb-2" loading="lazy">
+              <img class='img-fluid rounded mb-2 ratio ratio-4x3 mb-2' src="{{ post.image | relative_url }}"
+                style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy">
               {% endif %}
 
               <small class="d-block">
