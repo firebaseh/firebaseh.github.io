@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://firebaseh.github.io/sitemap.xml

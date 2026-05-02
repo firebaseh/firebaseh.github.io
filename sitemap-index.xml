@@ -1,0 +1,26 @@
+---
+layout: null
+---
+
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- POSTS SITEMAP -->
+  <sitemap>
+    <loc>{{ site.url }}{{ site.baseurl }}/sitemap-posts.xml</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+  </sitemap>
+
+  <!-- PAGES SITEMAP -->
+  <sitemap>
+    <loc>{{ site.url }}{{ site.baseurl }}/sitemap-pages.xml</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+  </sitemap>
+
+  <!-- IMAGES SITEMAP -->
+  <sitemap>
+    <loc>{{ site.url }}{{ site.baseurl }}/sitemap-images.xml</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+  </sitemap>
+
+</sitemapindex>

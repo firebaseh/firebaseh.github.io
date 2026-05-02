@@ -1,0 +1,46 @@
+---
+layout: null
+---
+
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- HOME -->
+  <url>
+    <loc>{{ site.url }}{{ site.baseurl }}/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- PAGES -->
+  {% for page in site.pages %}
+    {% if page.sitemap != false and page.url %}
+  <url>
+    <loc>{{ site.url }}{{ site.baseurl }}{{ page.url }}</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+    {% endif %}
+  {% endfor %}
+
+  <!-- POSTS (FILTER publish_at) -->
+  {% assign now = site.time | date: "%s" %}
+
+  {% for post in site.posts %}
+
+    {% assign publish_time = post.publish_at | date: "%s" %}
+
+    {% if post.publish_at == nil or publish_time <= now %}
+
+  <url>
+    <loc>{{ site.url }}{{ site.baseurl }}{{ post.url }}</loc>
+    <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+    {% endif %}
+  {% endfor %}
+
+</urlset>
