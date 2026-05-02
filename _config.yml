@@ -6,12 +6,12 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: Aridjaya
+title: Firebaseh
 email: admin@aridjaya.com
 description: >
   A collection of high-quality HD, Full HD, and 4K wallpapers featuring nature landscapes, mountains, forests, beaches, sunsets, city views, and aesthetic designs.
 
-url: "https://firebase.github.io"
+url: "https://firebaseh.github.io"
 baseurl: "/"
 
 timezone: Asia/Jakarta
@@ -20,11 +20,11 @@ future: false
 
 default-image: logo.jpg
 
-built-by: firebase
+built-by: firebaseh
 
 copyright:
-  name: aridjaya
-  link: "https://firebase.github.io"
+  name: firebaseh
+  link: "https://firebaseh.github.io"
 
 markdown: kramdown
 permalink: /:title/
