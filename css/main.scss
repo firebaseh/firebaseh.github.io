@@ -1,6 +1,4 @@
----
----
-@import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
+--- --- @import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 // Our variables
@@ -223,14 +221,19 @@ html {
     font-size: 14px;
   }
 
+  .card-img-top {
+    height: auto;
+    aspect-ratio: 4/3;
+  }
+
   .container {
     padding-left: 12px;
     padding-right: 12px;
   }
 
-  .card-img-top {
-    height: auto;
-    aspect-ratio: 4/3;
+  .post-item {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
   }
 
   .post-content p {
@@ -239,4 +242,3 @@ html {
   }
 
 }
-

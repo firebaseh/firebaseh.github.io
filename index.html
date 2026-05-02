@@ -8,61 +8,53 @@ layout: default
 
     {% assign now = site.time | date: "%s" %}
 
-    {% for post in paginator.posts %}   
+    {% for post in paginator.posts %}
 
-      {% assign publish_time = post.publish_at | date: "%s" %}
+    {% assign publish_time = post.publish_at | date: "%s" %}
 
-      {% if post.publish_at == nil or publish_time <= now %}
+    {% if post.publish_at == nil or publish_time <= now %}
 
-      <div 
-        class="col-12 col-sm-6 col-lg-4 post-item"
-        data-category="{{ post.categories | join: ' ' }}"
-      >
-        
-        <div class="card border border-1 bg-light shadow-none h-100 card-hover">
+    <div class="col-12 col-md-6 col-lg-4 post-item" data-category="{{ post.categories | join: ' ' }}">
 
-          <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
+      <div class="card border border-1 bg-light shadow-none h-100 card-hover">
 
-            {% if post.image %}
-            <div class="overflow-hidden position-relative">
+        <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
 
-              <!-- BADGE NEW -->
-              {% assign post_time = post.date | date: "%s" %}
-              {% assign diff = now | minus: post_time %}
-              {% if diff < 604800 %}
-              <span class="badge bg-danger position-absolute m-2">NEW</span>
-              {% endif %}
+          {% if post.image %}
+          <div class="overflow-hidden position-relative">
 
-              <img 
-                src="{{ post.image | relative_url }}" 
-                alt="{{ post.title }}" 
-                class="card-img-top"
-                loading="lazy"
-              >
-            </div>
+            <!-- BADGE NEW -->
+            {% assign post_time = post.date | date: "%s" %}
+            {% assign diff = now | minus: post_time %}
+            {% if diff < 604800 %}
+            <span class="badge bg-danger position-absolute m-2">NEW</span>
             {% endif %}
 
-            <div class="card-body">
-              <h5 class="fw-semibold mb-2 text-capitalize">
-                {{ post.title }}
-              </h5>
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="card-img-top" loading="lazy">
+          </div>
+          {% endif %}
 
-              <small class="text-muted d-block mb-2">
-                {{ post.date | date: "%b %-d, %Y" }}
-              </small>
+          <div class="card-body">
+            <h5 class="fw-semibold mb-2 text-capitalize">
+              {{ post.title }}
+            </h5>
 
-              <p class="text-secondary mb-2">
-                {{ post.excerpt | strip_html | truncate: 100 }}
-              </p>
-            </div>
+            <small class="text-muted d-block mb-2">
+              {{ post.date | date: "%b %-d, %Y" }}
+            </small>
 
-          </a>
+            <p class="text-secondary mb-2">
+              {{ post.excerpt | strip_html | truncate: 100 }}
+            </p>
+          </div>
 
-        </div>
+        </a>
 
       </div>
 
-      {% endif %}
+    </div>
+
+    {% endif %}
 
     {% endfor %}
 
