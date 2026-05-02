@@ -1,0 +1,102 @@
+<div class="readmore-list">
+
+  <h5 class="readmore-title">Read More :</h5>
+
+  {% assign related_posts = site.posts | where_exp: "post", "post.url != page.url" %}
+  {% assign count = 0 %}
+  {% assign found = false %}
+
+  <!-- PRIORITY: Match Tags -->
+
+  {% for post in related_posts %}
+  {% if post.tags and page.tags %}
+
+  {% assign match = false %}
+
+  {% for tag in post.tags %}
+  {% if page.tags contains tag %}
+  {% assign match = true %}
+  {% endif %}
+  {% endfor %}
+
+  {% if match %}
+
+  {% assign found = true %}
+
+  <div class="readmore-item">
+    <a href="{{ post.url | relative_url }}">
+      {{ post.title }}
+    </a>
+  </div>
+
+  {% assign count = count | plus: 1 %}
+
+  {% if count >= 5 %}
+  {% break %}
+  {% endif %}
+
+  {% endif %}
+  {% endif %}
+  {% endfor %}
+
+  <!-- FALLBACK: Latest Posts -->
+
+  {% if found == false %}
+
+  {% for post in related_posts limit:5 %}
+
+  <div class="readmore-item">
+    <a href="{{ post.url | relative_url }}">
+      {{ post.title }}
+    </a>
+  </div>
+
+  {% endfor %}
+
+  {% endif %}
+
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+
+  var adSource = document.getElementById("readmore");
+  var postBody = document.querySelector(".article-post");
+
+  if (!adSource) {
+    console.log("Ad source tidak ditemukan");
+    return;
+  }
+
+  if (!postBody) {
+    console.log("Article post tidak ditemukan");
+    return;
+  }
+
+  // Ambil semua elemen konten
+  var elements = postBody.querySelectorAll(
+    "p, img, h2, h3, h4, blockquote, ul, ol"
+  );
+
+  if (elements.length === 0) {
+    console.log("Tidak ada elemen konten");
+    return;
+  }
+
+  // Hitung posisi tengah
+  var middleIndex = Math.floor(elements.length / 2);
+
+  // Clone iklan
+  var adClone = adSource.cloneNode(true);
+
+  adClone.style.display = "block";
+  adClone.removeAttribute("id");
+
+  // Insert ke tengah
+  elements[middleIndex].insertAdjacentElement(
+    "afterend",
+    adClone
+  );
+
+});
+</script>
