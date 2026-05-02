@@ -30,7 +30,8 @@ layout: default
             <span class="badge bg-danger position-absolute m-2">NEW</span>
             {% endif %}
 
-            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="card-img-top" style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy">
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="card-img-top"
+              style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy">
           </div>
           {% endif %}
 
@@ -59,4 +60,20 @@ layout: default
     {% endfor %}
 
   </div>
+
+  <!-- PAGINATION -->
+  <div class="container pb-5"> {% if paginator.total_pages > 1 %} <nav>
+      <ul class="pagination justify-content-center"> <!-- Prev --> {% if paginator.previous_page %} <li
+          class="page-item"> <a class="page-link" href="{{ paginator.previous_page_path | relative_url }}"> &laquo; </a>
+        </li> {% else %} <li class="page-item disabled"> <span class="page-link">&laquo;</span> </li> {% endif %}
+        <!-- Numbers --> {% for page in (1..paginator.total_pages) %} {% if page == paginator.page %} <li
+          class="page-item active"> <span class="page-link">{{ page }}</span> </li> {% elsif page == 1 %} <li
+          class="page-item"> <a class="page-link" href="{{ '/' | relative_url }}">{{ page }}</a> </li> {% else %} <li
+          class="page-item"> <a class="page-link"
+            href="{{ site.paginate_path | relative_url | replace: ':num', page }}"> {{ page }} </a> </li> {% endif %}
+        {% endfor %} <!-- Next --> {% if paginator.next_page %} <li class="page-item"> <a class="page-link"
+            href="{{ paginator.next_page_path | relative_url }}"> &raquo; </a> </li> {% else %} <li
+          class="page-item disabled"> <span class="page-link">&raquo;</span> </li> {% endif %} </ul>
+    </nav> {% endif %} </div>
+
 </div>
