@@ -1,24 +1,25 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-none py-3 sticky-top ">
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top py-2">
   <div class="container">
-    
-    <!-- Brand -->
-    <a class="navbar-brand fw-bold text-capitalize" href="{{ '/' | relative_url }}">
+
+    <!-- BRAND -->
+    <a class="navbar-brand fw-bold" href="{{ '/' | relative_url }}">
       {{ site.title }}
     </a>
 
-    <!-- Toggle -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
+    <!-- TOGGLER -->
+    <button 
+      class="navbar-toggler border-0" 
+      type="button" 
+      data-bs-toggle="collapse" 
+      data-bs-target="#navbarNav"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Menu -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto align-items-lg-center">
+    <!-- MENU -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <ul class="navbar-nav ms-auto text-center text-lg-start mt-3 mt-lg-0">
 
         <li class="nav-item">
           <a class="nav-link active" href="{{ '/' | relative_url }}">Home</a>
@@ -32,17 +33,16 @@
           <a class="nav-link" href="{{ '/categories/' | relative_url }}">Categories</a>
         </li>
 
-        <!-- Dropdown -->
+        <!-- DROPDOWN -->
         <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
+          <a 
+            class="nav-link dropdown-toggle" 
+            href="#" 
             data-bs-toggle="dropdown"
           >
             Explore
           </a>
-          <ul class="dropdown-menu shadow-sm border-0">
+          <ul class="dropdown-menu border-0 shadow-sm text-center text-lg-start">
             <li><a class="dropdown-item" href="#">Action</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider"></li>
@@ -54,14 +54,18 @@
           </ul>
         </li>
 
-        <!-- Button CTA -->
-        <li class="nav-item ms-lg-3">
-          <a class="btn btn-primary px-3" href="https://github.com/sharu725/cards">
+        <!-- CTA BUTTON -->
+        <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+          <a 
+            class="btn btn-primary w-100 w-lg-auto px-3"
+            href="https://aridjaya.com"
+          >
             Download
           </a>
         </li>
 
       </ul>
+
     </div>
   </div>
 </nav>
