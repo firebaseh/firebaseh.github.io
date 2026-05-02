@@ -1,26 +1,16 @@
 /* sticky */
 jQuery(document).ready(function () {
+    var i = jQuery(window).width();
 
-    function initSticky() {
-
-        var width = jQuery(window).width();
-
-        if (width < 768) {
-            jQuery("#sidebar-sticky").trigger("sticky_kit:detach");
-        } else {
-            jQuery("#sidebar-sticky").stick_in_parent({
-                parent: "#wrapper",
-                offset_top: 100
-            });
-        }
+    function e() {
+        jQuery("#sidebar-sticky").stick_in_parent({
+            parent: "#wrapper",
+            offset_top: 100
+        })
     }
-
-    initSticky();
-
-    jQuery(window).on("resize", function () {
-        initSticky();
-    });
-
+    i < 768 ? jQuery("#sidebar-sticky").trigger("sticky_kit:detach") : e(), jQuery(window).resize(function () {
+        (i = jQuery(window).width()) < 768 ? jQuery("#sidebar-sticky").trigger("sticky_kit:detach") : e()
+    })
 });
 
 /* Read More */
