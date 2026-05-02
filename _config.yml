@@ -16,7 +16,7 @@ description: > # this means to ignore newlines until "baseurl:"
 url: "http://firebaseh.github.io" # the base hostname & protocol for your site
 
 # post for future
-future: true
+future: false
 timezone: Asia/Jakarta
 
 # sidebar
