@@ -17,24 +17,28 @@ permalink: /404.html
 
     <div class="row g-3">
         {% for post in random_posts %}
-        <div class="card border border-1 bg-light shadow-none h-100 card-hover">
+        <div class="col-12 col-md-6 col-lg-4 post-item">
+            <div class="card border border-1 bg-light shadow-none h-100 card-hover">
 
-            <a href="{{ site.baseurl }}{{ post.url }}" class="text-decoration-none text-dark">
+                <a href="{{ site.baseurl }}{{ post.url }}" class="text-decoration-none text-dark">
 
-                {% if post.image %}
-                {% if post.image contains 'http' %}
-                <img src="{{ post.image }}" class="card-img-top" style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy">
-                {% else %}
-                <img src="{{ site.baseurl }}/{{ post.image }}" class="card-img-top" style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy">
-                {% endif %}
-                {% endif %}
-                <h6 class="text-dark text-center">
-                    {{ post.title | truncate: 60 }}
-                </h6>
-            </a>
+                    {% if post.image %}
+                    {% if post.image contains 'http' %}
+                    <img src="{{ post.image }}" class="card-img-top" style="aspect-ratio: 4/3; object-fit: cover;"
+                        loading="lazy">
+                    {% else %}
+                    <img src="{{ site.baseurl }}/{{ post.image }}" class="card-img-top"
+                        style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy">
+                    {% endif %}
+                    {% endif %}
+                    <h6 class="text-dark text-center">
+                        {{ post.title | truncate: 60 }}
+                    </h6>
+                </a>
+            </div>
         </div>
         {% endfor %}
-   </div>
+    </div>
 
     <a href="{{ site.baseurl }}/" class="btn btn-success mt-3">
         Back to Home
