@@ -11,13 +11,14 @@ permalink: /404.html
     <p class="mb-4">
         The page you're looking for doesn't exist, but here's something you might like.
     </p>
+    
+    <div class="col-12 col-md-6 col-lg-4 post-item">
+        <!-- RANDOM POST -->
+        {% assign random_posts = site.posts | sample:12 %}
 
-    <!-- RANDOM POST -->
-    {% assign random_posts = site.posts | sample:12 %}
+        <div class="row g-3">
+            {% for post in random_posts %}
 
-    <div class="row g-3">
-        {% for post in random_posts %}
-        <div class="col-12 col-md-6 col-lg-4 post-item">
             <div class="card border border-1 bg-light shadow-none h-100 card-hover">
 
                 <a href="{{ site.baseurl }}{{ post.url }}" class="text-decoration-none text-dark">
@@ -36,10 +37,9 @@ permalink: /404.html
                     </h6>
                 </a>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
-
     <a href="{{ site.baseurl }}/" class="btn btn-success mt-3">
         Back to Home
     </a>
