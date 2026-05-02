@@ -1,4 +1,4 @@
-<div class="col-lg-4 mt-4 mt-lg-0 sidebar w-100">
+<div class="col-lg-4 mt-4 mt-lg-0 sidebar">
 
   <!-- RECENT POSTS -->
   <div class="card border border-1 shadow-none bg-light mb-4">
@@ -10,9 +10,11 @@
       <div class="d-flex mb-3">
 
         {% if post.image %}
-        <div class="me-2" style="width:100px;">
-          <img src="{{ post.image | relative_url }}" class="img-fluid rounded ratio ratio-4x3" style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy"
-            style="height:60px; width:100px; object-fit:cover;">
+        <div class="me-2">
+          <img src="{{ post.image | relative_url }}" 
+               class="rounded"
+               style="width: 120px; height: 75px; object-fit: cover;" 
+               loading="lazy">
         </div>
         {% endif %}
 
@@ -22,7 +24,9 @@
               {{ post.title | truncate: 50 }}
             </small>
           </a>
-          <small class="text-muted">{{ post.date | date: "%b %d, %Y" }}</small>
+          <small class="text-muted">
+            {{ post.date | date: "%b %d, %Y" }}
+          </small>
         </div>
 
       </div>
@@ -33,25 +37,44 @@
   </div>
 
   <!-- CATEGORIES -->
-  <div class="card border sidebar border-1 shadow-none bg-light mb-4">
+  <div class="card border border-1 shadow-none bg-light mb-4">
     <div class="card-body">
       <h5 class="fw-bold mb-3">Categories</h5>
 
       <ul class="list-unstyled mb-0">
         {% for category in site.categories %}
         <li class="mb-2 d-flex justify-content-between">
-          <a href="/categories/{{ category[0] | slugify }}/" class="text-capitalize text-decoration-none">
+          <a href="/categories/{{ category[0] | slugify }}/" 
+             class="text-capitalize text-decoration-none">
             {{ category[0] }}
           </a>
-          <span class="badge bg-light text-dark">{{ category[1].size }}</span>
+          <span class="badge bg-light text-dark">
+            {{ category[1].size }}
+          </span>
         </li>
         {% endfor %}
       </ul>
     </div>
   </div>
 
-</div>
+  <!-- STICKY WIDGET -->
+  <div class="sidebar-sticky">
 
-<div class="col-lg-4 mt-4 mt-lg-0 sidebar-sticky w-100">
+    <div class="card border border-1 shadow-none bg-light">
+      <div class="card-body">
+        <h5 class="fw-bold mb-3">🔥 Featured</h5>
+
+        <p class="small text-muted mb-2">
+          Highlight content / CTA / ads / promo.
+        </p>
+
+        <a href="#" class="btn btn-dark btn-sm w-100">
+          Explore Now
+        </a>
+
+      </div>
+    </div>
+
+  </div>
 
 </div>
