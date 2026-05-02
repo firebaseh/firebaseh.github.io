@@ -4,57 +4,68 @@ layout: default
 permalink: /404.html
 ---
 
-<div class="container text-center" style="padding:60px 20px;">
-    <h1 style="font-size:8rem; font-weight:bold;"><strong>404</strong></h1>
-    <h3 class="mb-3"><strong>Page Not Found :(</strong></h3>
+<div class="container py-5 text-center">
 
-    <p class="mb-4">
-        The page you're looking for doesn't exist, but here's something you might like.
-    </p>
+  <h1 class="display-1 fw-bold">404</h1>
+  <h4 class="mb-3 fw-semibold">Page Not Found 😢</h4>
 
-    <div class="col-12 col-md-6 col-lg-4 post-item">
-        <!-- RANDOM POST -->
-        {% assign random_posts = site.posts | sample:12 %}
+  <p class="mb-4 text-muted">
+    The page you're looking for doesn't exist. Try these posts instead 👇
+  </p>
 
-        <div class="row g-3">
-            {% for post in random_posts %}
+  {% assign random_posts = site.posts | sample:6 %}
 
-            <div class="card border border-1 bg-light shadow-none h-100 card-hover">
+  <div class="row g-4 text-start">
 
-                <a href="{{ site.baseurl }}{{ post.url }}" class="text-decoration-none text-dark">
+    {% for post in random_posts %}
 
-                    {% if post.image %}
-                    {% if post.image contains 'http' %}
-                    <img src="{{ post.image }}" class="card-img-top" style="aspect-ratio: 4/3; object-fit: cover;"
-                        loading="lazy">
-                    {% else %}
-                    <img src="{{ site.baseurl }}/{{ post.image }}" class="card-img-top"
-                        style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy">
-                    {% endif %}
-                    {% endif %}
+    <div class="col-12 col-md-6 col-lg-4">
 
+      <div class="card modern-card h-100 border-0">
 
-                    <div class="card-body">
-                        <h4 class="fw-semibold mb-2 text-capitalize">
-                            {{ post.title }}
-                        </h4>
+        <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
 
-                        <small class="text-muted d-block mb-2">
-                            {{ post.date | date: "%b %-d, %Y" }}
-                        </small>
+          {% if post.image %}
+          <div class="overflow-hidden position-relative">
 
-                        <p class="text-secondary mb-2">
-                            {{ post.excerpt | strip_html | truncate: 100 }}
-                        </p>
-                    </div>
+            <img 
+              src="{{ post.image | relative_url }}" 
+              alt="{{ post.title }}"
+              class="card-img-top"
+              loading="lazy"
+            >
 
-                </a>
-            </div>
-            {% endfor %}
-        </div>
+          </div>
+          {% endif %}
+
+          <div class="card-body">
+
+            <h5 class="title mb-2">
+              {{ post.title }}
+            </h5>
+
+            <small class="text-muted d-block mb-2">
+              {{ post.date | date: "%b %-d, %Y" }}
+            </small>
+
+            <p class="excerpt">
+              {{ post.excerpt | strip_html | truncate: 100 }}
+            </p>
+
+          </div>
+
+        </a>
+
+      </div>
+
     </div>
-    <a href="{{ site.baseurl }}/" class="btn btn-success mt-3">
-        Back to Home
-    </a>
+
+    {% endfor %}
+
+  </div>
+
+  <a href="{{ '/' | relative_url }}" class="btn btn-dark mt-5 px-4">
+    ← Back to Home
+  </a>
 
 </div>
