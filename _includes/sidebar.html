@@ -11,7 +11,7 @@
 
         {% if post.image %}
         <div class="me-2" style="width:80px;">
-          <img src="{{ post.image | relative_url }}" class="img-fluid rounded w-100" loading="lazy"
+          <img src="{{ post.image | relative_url }}" class="img-fluid rounded w-100 ratio ratio-4x3" loading="lazy"
             style="height:60px; object-fit:cover;">
         </div>
         {% endif %}
