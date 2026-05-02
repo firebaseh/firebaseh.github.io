@@ -54,7 +54,7 @@ $on-laptop: 800px;
 
 /* Sticky hanya aktif di desktop */
 @media (min-width: 992px) {
-  .sidebar-sticky {
+  #sidebar-sticky {
     position: sticky;
     top: 100px;
     align-self: flex-start;
