@@ -12,7 +12,7 @@
         {% if post.image %}
         <div class="me-2">
           <img src="{{ post.image | relative_url }}" class="rounded"
-            style="width: 120px; height: 75px; object-fit: cover;" loading="lazy">
+            style="min-width: 120px; height: 75px; object-fit: cover;" loading="lazy">
         </div>
         {% endif %}
 
