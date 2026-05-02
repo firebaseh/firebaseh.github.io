@@ -104,7 +104,7 @@ jQuery(document).ready(function () {
     function e() {
         jQuery("#sidebar-sticky").stick_in_parent({
             parent: "#wrapper",
-            offset_top: 10
+            offset_top: 100
         })
     }
     i < 768 ? jQuery("#sidebar-sticky").trigger("sticky_kit:detach") : e(), jQuery(window).resize(function () {
