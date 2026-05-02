@@ -13,7 +13,7 @@ permalink: /404.html
     The page you're looking for doesn't exist. Try these posts instead 👇
   </p>
 
-  {% assign random_posts = site.posts | where_exp:"post","post.image" | sample:6}
+  {% assign random_posts = site.posts | sample:6}
 
   <div class="row g-4 text-start">
 
