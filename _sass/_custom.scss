@@ -1,0 +1,224 @@
+
+/**
+* Font Family
+*/
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-size: 14px;
+}
+
+.roboto {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+
+.nunito-sans {
+  font-family: "Nunito Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100,
+    "YTLC" 500;
+}
+
+.archivo-black-regular {
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.google-sans {
+  font-family: "Google Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+    "GRAD" 0;
+}
+
+/**
+* Navigasi
+*/
+
+/* Navbar mobile spacing */
+.navbar-nav .nav-link {
+  padding: 10px 0;
+  font-size: 15px;
+}
+
+/* Hover effect */
+.nav-link {
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  opacity: 0.7;
+  color: #000;
+}
+
+/* Box menu saat dibuka di HP */
+@media (max-width: 991px) {
+  .navbar-collapse {
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 10px;
+  }
+}
+
+.card {
+  border-radius: 12px;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  transition: 0.3s;
+}
+
+.card-body {
+  padding: 12px;
+}
+
+.card-body h5 {
+  font-size: 14px;
+  line-height: 1.4;
+  height: 40px;
+  overflow: hidden;
+}
+
+.card-img-top {
+  height: 180px;
+  object-fit: cover;
+  transition: 0.4s;
+}
+
+.post-content p {
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+
+.post-content img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+
+.post-content h2,
+.post-content h3 {
+  margin-top: 1.5rem;
+  font-weight: 600;
+}
+
+/**
+* Related Post
+*/
+
+.related-posts img {
+  object-fit: cover;
+  transition: 0.3s;
+  aspect-ratio: 4/3;
+}
+
+.related-posts a:hover img {
+  transform: scale(1.05);
+}
+
+/**
+* Sidebar
+*/
+
+.sidebar .card {
+  border-radius: 12px;
+}
+
+.sidebar img {
+  transition: 0.3s;
+}
+
+.sidebar a:hover img {
+  transform: scale(1.05);
+}
+
+.sidebar a:hover {
+  opacity: 0.75;
+}
+
+/**
+* Footer
+*/
+
+.footer {
+  font-size: 14px;
+}
+
+.footer a {
+  color: #333;
+  transition: 0.3s;
+}
+
+.footer a:hover {
+  color: #0d6efd;
+  opacity: 0.7;
+}
+
+.footer i {
+  transition: 0.3s;
+}
+
+.footer a:hover i {
+  transform: scale(1.2);
+}
+
+/**
+* Responsive Mobile
+*/
+
+/* STICKY DESKTOP */
+@media(min-width: 992px) {
+  .sidebar-sticky {
+    position: sticky;
+    top: 90px;
+  }
+}
+
+@media (max-width: 991px) {
+
+  .sidebar-sticky {
+    position: relative;
+    top: 0;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .card-img-top {
+    height: auto;
+    aspect-ratio: 4/3;
+  }
+
+  .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .post-item {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  .post-content p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+}
