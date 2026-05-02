@@ -2,120 +2,76 @@
 layout: default
 ---
 
+{% assign now = site.time | date: "%s" %}
+
 <div class="py-4">
 
   <div class="row g-3" id="post-container">
 
-    {% assign now = site.time | date: "%s" %}
-
-    {% assign now = site.time | date: "%s" %}
-    {% assign has_visible_posts = false %}
+    {% assign visible_count = 0 %}
 
     {% for post in paginator.posts %}
-    {% assign publish_time = post.publish_at | date: "%s" %}
 
-    {% if post.publish_at == nil or publish_time <= now %}
-    {% assign has_visible_posts = true %}
-    {% endif %}
-    {% endfor %}
-
-    {% if has_visible_posts %}
-    <div class="row g-3" id="post-container">
-
-      {% for post in paginator.posts %}
       {% assign publish_time = post.publish_at | date: "%s" %}
 
       {% if post.publish_at == nil or publish_time <= now %}
 
-      <div class="col-12 col-md-6 col-lg-4 post-item" data-category="{{ post.categories | join: ' ' }}">
+        {% assign visible_count = visible_count | plus: 1 %}
 
-        <div class="card border border-1 bg-light shadow-none h-100 card-hover">
+        <div class="col-12 col-md-6 col-lg-4 post-item"
+             data-category="{{ post.categories | join: ' ' }}">
 
-          <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
+          <div class="card border border-1 bg-light h-100 card-hover">
 
-            {% if post.image %}
-            <div class="overflow-hidden position-relative">
+            <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
 
-              {% assign post_time = post.date | date: "%s" %}
-              {% assign diff = now | minus: post_time %}
+              {% if post.image %}
+              <div class="overflow-hidden position-relative">
 
-              {% if diff < 604800 %}
-              <span class="badge bg-danger position-absolute m-2">NEW</span>
+                {% assign post_time = post.date | date: "%s" %}
+                {% assign diff = now | minus: post_time %}
+
+                {% if diff < 604800 %}
+                <span class="badge bg-danger position-absolute m-2">NEW</span>
+                {% endif %}
+
+                <img src="{{ post.image | relative_url }}"
+                     class="card-img-top"
+                     style="aspect-ratio: 4/3; object-fit: cover;"
+                     loading="lazy">
+              </div>
               {% endif %}
 
-              <img src="{{ post.image | relative_url }}" class="card-img-top"
-                style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy">
-            </div>
-            {% endif %}
+              <div class="card-body">
+                <h4 class="fw-semibold mb-2 text-capitalize">
+                  {{ post.title }}
+                </h4>
 
-            <div class="card-body">
-              <h4 class="fw-semibold mb-2 text-capitalize">
-                {{ post.title }}
-              </h4>
+                <small class="text-muted d-block mb-2">
+                  {{ post.date | date: "%b %-d, %Y" }}
+                </small>
 
-              <small class="text-muted d-block mb-2">
-                {{ post.date | date: "%b %-d, %Y" }}
-              </small>
+                <p class="excerpt">
+                  {{ post.excerpt | strip_html | truncate: 100 }}
+                </p>
+              </div>
 
-              <p class="excerpt">
-                {{ post.excerpt | strip_html | truncate: 100 }}
-              </p>
-            </div>
+            </a>
 
-          </a>
+          </div>
 
         </div>
 
-      </div>
-
       {% endif %}
-      {% endfor %}
 
-    </div>
-    {% endif %}
-
-    <div class="col-12 col-md-6 col-lg-4 post-item" data-category="{{ post.categories | join: ' ' }}">
-
-      <div class="card border border-1 bg-light shadow-none h-100 card-hover">
-
-        <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
-
-          {% if post.image %}
-          <div class="overflow-hidden position-relative">
-
-            <!-- BADGE NEW -->
-            {% assign post_time = post.date | date: "%s" %}
-            {% assign diff = now | minus: post_time %}
-            {% if diff < 604800 %}
-            <span class="badge bg-danger position-absolute m-2">NEW</span>
-            {% endif %}
-
-            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="card-img-top"
-              style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy">
-          </div>
-          {% endif %}
-
-          <div class="card-body">
-            <h4 class="fw-semibold mb-2 text-capitalize">
-              {{ post.title }}
-            </h4>
-
-            <small class="text-muted d-block mb-2">
-              {{ post.date | date: "%b %-d, %Y" }}
-            </small>
-
-            <p class="excerpt">
-              {{ post.excerpt | strip_html | truncate: 100 }}
-            </p>
-          </div>
-
-        </a>
-
-      </div>
-
-    </div>
-    {% endif %}
     {% endfor %}
+
+    {% if visible_count == 0 %}
+      <div class="col-12 text-center text-muted py-5">
+        No posts available yet.
+      </div>
+    {% endif %}
+
   </div>
 
   <!-- PAGINATION -->
@@ -126,7 +82,7 @@ layout: default
     <nav>
       <ul class="pagination justify-content-center">
 
-        <!-- PREVIOUS -->
+        <!-- PREV -->
         {% if paginator.previous_page %}
         <li class="page-item">
           <a class="page-link" href="{{ paginator.previous_page_path | relative_url }}">&laquo;</a>
@@ -137,10 +93,6 @@ layout: default
         </li>
         {% endif %}
 
-        <!-- =========================
-           LIMITED PAGE NUMBERS
-      ========================== -->
-
         {% assign total = paginator.total_pages %}
         {% assign current = paginator.page %}
         {% assign delta = 2 %}
@@ -148,61 +100,49 @@ layout: default
         {% assign start = current | minus: delta %}
         {% assign end = current | plus: delta %}
 
-        {% if start < 1 %}
-        {% assign start = 1 %}
-        {% endif %}
+        {% if start < 1 %}{% assign start = 1 %}{% endif %}
+        {% if end > total %}{% assign end = total %}{% endif %}
 
-        {% if end > total %}
-        {% assign end = total %}
-        {% endif %}
-
-        <!-- FIRST PAGE -->
         {% if start > 1 %}
-        <li class="page-item">
-          <a class="page-link" href="{{ '/' | relative_url }}">1</a>
-        </li>
+          <li class="page-item">
+            <a class="page-link" href="{{ '/' | relative_url }}">1</a>
+          </li>
 
-        {% if start > 2 %}
-        <li class="page-item disabled">
-          <span class="page-link">...</span>
-        </li>
-        {% endif %}
+          {% if start > 2 %}
+          <li class="page-item disabled">
+            <span class="page-link">...</span>
+          </li>
+          {% endif %}
         {% endif %}
 
-        <!-- MIDDLE PAGES -->
         {% for page in (start..end) %}
-        {% if page == current %}
-        <li class="page-item active">
-          <span class="page-link">{{ page }}</span>
-        </li>
-
-        {% elsif page == 1 %}
-        <li class="page-item">
-          <a class="page-link" href="{{ '/' | relative_url }}">{{ page }}</a>
-        </li>
-
-        {% else %}
-        <li class="page-item">
-          <a class="page-link" href="{{ site.paginate_path | relative_url | replace: ':num', page }}">
-            {{ page }}
-          </a>
-        </li>
-        {% endif %}
+          {% if page == current %}
+            <li class="page-item active">
+              <span class="page-link">{{ page }}</span>
+            </li>
+          {% else %}
+            <li class="page-item">
+              <a class="page-link"
+                 href="{{ site.paginate_path | relative_url | replace: ':num', page }}">
+                {{ page }}
+              </a>
+            </li>
+          {% endif %}
         {% endfor %}
 
-        <!-- LAST PAGE -->
         {% if end < total %}
-        {% if end < total | minus: 1 %}
-        <li class="page-item disabled">
-          <span class="page-link">...</span>
-        </li>
-        {% endif %}
+          {% if end < total | minus: 1 %}
+          <li class="page-item disabled">
+            <span class="page-link">...</span>
+          </li>
+          {% endif %}
 
-        <li class="page-item">
-          <a class="page-link" href="{{ site.paginate_path | relative_url | replace: ':num', total }}">
-            {{ total }}
-          </a>
-        </li>
+          <li class="page-item">
+            <a class="page-link"
+               href="{{ site.paginate_path | relative_url | replace: ':num', total }}">
+              {{ total }}
+            </a>
+          </li>
         {% endif %}
 
         <!-- NEXT -->
