@@ -107,10 +107,6 @@ layout: default
         </ul>
       </nav>
 
-
-
-
-
       <!-- RELATED POSTS PRO -->
       <div class="related-posts mb-5">
         <h6 class="fw-bold mb-3">Related Posts</h6>
@@ -146,7 +142,7 @@ layout: default
 
               {% if post.image %}
               <img class='img-fluid rounded mb-2 ratio ratio-4x3 mb-2' src="{{ post.image | relative_url }}"
-                style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy">
+                style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy" />
               {% endif %}
 
               <small class="d-block">
@@ -183,8 +179,8 @@ layout: default
           {% endfor %}
         </div>
         {% endif %}
-
       </div>
+
 
     </div>
 
