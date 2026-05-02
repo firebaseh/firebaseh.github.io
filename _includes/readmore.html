@@ -1,6 +1,6 @@
 <div class="readmore-list bg-light rounded border border-1 mt-4 p-4">
 
-  <h5 class="fw-bold mb-3">Read More :</h5>
+  <h6 class="fw-bold text-decoration-none mb-3">Read More :</h6>
 
   {% assign related_posts = site.posts | where_exp: "post", "post.url != page.url" %}
   {% assign count = 0 %}
@@ -31,7 +31,7 @@
         <div class="card mb-2 border-0 shadow-none">
           <div class="card-body py-2">
 
-            <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark fw-semibold">
+            <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
               {{ post.title }}
             </a>
 
