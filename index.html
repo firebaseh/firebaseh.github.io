@@ -30,7 +30,7 @@ layout: default
             <span class="badge bg-danger position-absolute m-2">NEW</span>
             {% endif %}
 
-            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="card-img-top" style="aspect-ratio:4/3;" loading="lazy">
+            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="card-img-top" style="aspect-ratio: 4/3;object-fit: cover;" loading="lazy">
           </div>
           {% endif %}
 
