@@ -4,7 +4,7 @@ layout: default
 
 <div class="py-4">
 
-  <div class="row g-4" id="post-container">
+  <div class="row g-3" id="post-container">
 
     {% assign now = site.time | date: "%s" %}
 
@@ -15,7 +15,7 @@ layout: default
       {% if post.publish_at == nil or publish_time <= now %}
 
       <div 
-        class="col-12 col-md-6 col-lg-4 post-item"
+        class="col-12 col-sm-6 col-lg-4 post-item"
         data-category="{{ post.categories | join: ' ' }}"
       >
         
@@ -44,7 +44,7 @@ layout: default
 
             <div class="card-body">
               <h5 class="fw-semibold mb-2 text-capitalize">
-                {{ post.title | truncate: 50 }}
+                {{ post.title }}
               </h5>
 
               <small class="text-muted d-block mb-2">

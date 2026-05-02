@@ -47,6 +47,10 @@ $on-laptop: 800px;
 * Font Family
 */
 
+html {
+  scroll-behavior: smooth;
+}
+
 .roboto {
   font-family: "Roboto", sans-serif;
   font-optical-sizing: auto;
@@ -90,15 +94,27 @@ $on-laptop: 800px;
 }
 
 .card {
-  border-radius: 10px;
+  border-radius: 12px;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  transition: 0.3s;
 }
 
 .card-body {
   padding: 12px;
 }
 
+.card-body h5 {
+  font-size: 14px;
+  line-height: 1.4;
+  height: 40px;
+  overflow: hidden;
+}
+
 .card-img-top {
-  height: 240px;
+  height: 180px;
   object-fit: cover;
   transition: 0.4s;
 }
