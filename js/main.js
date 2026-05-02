@@ -139,7 +139,7 @@
             jQuery("#sidebar-sticky")
                 .stick_in_parent({
                     parent: "#wrapper",
-                    offset_top: 70
+                    offset_top: 100
                 })
         }
         t < 768 ? jQuery("#sidebar-sticky")
