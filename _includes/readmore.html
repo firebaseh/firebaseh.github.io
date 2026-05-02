@@ -1,6 +1,6 @@
 <div class="readmore-list bg-light rounded border border-1 mt-4 p-4">
 
-  <h6 class="text-decoration-none mb-3">Read More :</h6>
+  <h6 class="fw-bold text-decoration-none mb-3">Read More :</h6>
 
   {% assign related_posts = site.posts | where_exp: "post", "post.url != page.url" %}
   {% assign count = 0 %}
