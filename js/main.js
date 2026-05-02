@@ -1,27 +1,3 @@
-jQuery(document).ready(function () {
-
-    function initSticky() {
-
-        var width = jQuery(window).width();
-
-        if (width < 768) {
-            jQuery("#sidebar-sticky").trigger("sticky_kit:detach");
-        } else {
-            jQuery("#sidebar-sticky").stick_in_parent({
-                parent: "body",   // <- FIX paling penting
-                offset_top: 100
-            });
-        }
-    }
-
-    initSticky();
-
-    jQuery(window).on("resize", function () {
-        initSticky();
-    });
-
-});
-
 /* Read More */
 document.addEventListener("DOMContentLoaded", function () {
 
