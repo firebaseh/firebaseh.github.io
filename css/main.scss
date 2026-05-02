@@ -150,7 +150,7 @@ $on-laptop: 800px;
 
 /* STICKY DESKTOP */
 @media(min-width: 992px) {
-  .sidebar {
+  .sidebar-sticky {
     position: sticky;
     top: 90px;
   }
