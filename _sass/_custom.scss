@@ -184,6 +184,11 @@ body {
 
 /* STICKY DESKTOP */
 @media(min-width: 992px) {
+
+  .card-img-top {
+    height: 220px;
+  }
+
   .sidebar-sticky {
     position: sticky;
     top: 90px;
