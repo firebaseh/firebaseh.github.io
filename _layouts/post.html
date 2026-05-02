@@ -165,9 +165,9 @@ layout: default
         <!-- FALLBACK kalau kosong -->
         {% if relatedCount == 0 %}
         <div class="row g-3">
-          {% for post in site.posts limit:6 %}
+          {% for post in site.posts limit:8 %}
           {% if post.url != page.url %}
-          <div class="col-6 col-md-4">
+          <div class="col-6 col-md-3">
             <a href="{{ post.url | relative_url }}" class="text-decoration-none text-dark">
               {% if post.image %}
               <img src="{{ post.image | relative_url }}" class="img-fluid rounded mb-2">
